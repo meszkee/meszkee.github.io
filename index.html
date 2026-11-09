@@ -28,10 +28,11 @@
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
+      --radius-phone: 32px;
       --radius-full: 9999px;
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 12px rgba(15,23,42,0.06);
-      --shadow-lg: 0 10px 25px rgba(15,23,42,0.08);
+      --shadow-lg: 0 12px 28px rgba(15,23,42,0.1);
       --shadow-primary: 0 6px 20px rgba(0,102,255,0.28);
     }
 
@@ -344,14 +345,7 @@
       transform: rotate(45deg);
     }
 
-    /* INTERACTIVE APP SHOWCASE */
-    .showcase-section {
-      padding: 60px 20px 80px;
-      background: #FFFFFF;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
+    /* SECTION HEADER COMMON */
     .section-header {
       text-align: center;
       max-width: 680px;
@@ -382,206 +376,163 @@
       line-height: 1.5;
     }
 
-    /* PHONE MOCKUP */
-    .mockup-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      max-width: 960px;
-      margin: 0 auto;
-      flex-wrap: wrap;
+    /* SCREENSHOTS SHOWCASE */
+    .screens-section {
+      padding: 70px 20px 80px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .phone-container {
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .screen-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .phone-frame {
       width: 100%;
-      max-width: 340px;
-      background: #FFFFFF;
-      border-radius: 36px;
-      border: 8px solid #0F172A;
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16);
-      padding: 20px 18px;
+      max-width: 250px;
+      aspect-ratio: 9 / 19;
+      background: #0F172A;
+      border-radius: var(--radius-phone);
+      padding: 10px;
+      box-shadow: var(--shadow-lg);
       position: relative;
+      margin-bottom: 20px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .phone-frame:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 102, 255, 0.18);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      background: #F8FAFC;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .phone-notch {
-      width: 100px;
-      height: 18px;
+      width: 80px;
+      height: 14px;
       background: #0F172A;
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 10px 10px;
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10;
     }
 
-    .app-screen-header {
+    /* Real image element: if available, shows; if missing, falls back to styled preview card */
+    .screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .screen-placeholder {
+      width: 100%;
+      height: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #F1F5F9;
-    }
-
-    .app-stat-chip {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .app-script-switch {
-      display: flex;
-      background: #F1F5F9;
-      border-radius: var(--radius-full);
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .app-script-btn {
-      border: none;
-      background: transparent;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .app-script-btn.active {
-      background: var(--primary);
-      color: #FFFFFF;
-    }
-
-    .app-quiz-card {
-      background: #F8FAFC;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 24px 16px 18px;
+      background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
       text-align: center;
     }
 
-    .app-quiz-sub {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .placeholder-badge {
+      display: inline-block;
+      align-self: center;
+      background: var(--primary-light);
       color: var(--primary);
-      margin-bottom: 6px;
-    }
-
-    .app-quiz-phrase {
-      font-size: 18px;
+      font-size: 11px;
       font-weight: 800;
-      color: var(--text);
-      line-height: 1.35;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.2s;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      margin-top: 10px;
     }
 
-    .app-quiz-trans {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-top: 4px;
-    }
-
-    .app-options-list {
+    .placeholder-visual {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .app-option {
-      background: #FFFFFF;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .app-option.selected {
-      border-color: var(--primary);
-      background: var(--primary-light);
-      color: var(--primary);
-    }
-
-    .app-check-btn {
-      width: 100%;
-      background: var(--primary);
-      color: #FFFFFF;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 12px;
-      border-radius: var(--radius-sm);
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .app-check-btn:hover {
-      background: var(--primary-hover);
-    }
-
-    .showcase-details {
-      flex: 1;
-      min-width: 280px;
-      max-width: 480px;
-    }
-
-    .showcase-feature-item {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-
-    .showcase-icon-box {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--primary-light);
-      color: var(--primary);
-      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-      flex-shrink: 0;
+      flex: 1;
+      gap: 12px;
     }
 
-    .showcase-item-title {
+    .placeholder-icon {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.08));
+    }
+
+    .placeholder-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .placeholder-card-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      padding: 0 6px;
+    }
+
+    .placeholder-ui-bar {
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .placeholder-ui-progress {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--radius-full);
+    }
+
+    .screen-title {
       font-size: 17px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
-    .showcase-item-desc {
-      font-size: 14px;
+    .screen-desc {
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.45;
+      max-width: 240px;
     }
 
-    /* FEATURES GRID */
+    /* CORE FEATURES */
     .features-section {
       padding: 70px 20px;
       max-width: 1140px;
@@ -833,9 +784,9 @@
         width: 220px;
       }
 
-      .mockup-wrapper {
-        flex-direction: column;
-        align-items: center;
+      .screens-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
       }
 
       .cta-buttons .btn {
@@ -866,6 +817,14 @@
         font-size: 11px;
       }
 
+      .screens-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-frame {
+        max-width: 240px;
+      }
+
       .cta-card {
         padding: 30px 18px;
       }
@@ -883,7 +842,7 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="#showcase" class="nav-link" id="nav-showcase">Alkalmazás</a>
+        <a href="#screens" class="nav-link" id="nav-screens">Képernyők</a>
         <a href="#features" class="nav-link" id="nav-features">Funkciók</a>
         <a href="#curriculum" class="nav-link" id="nav-curriculum">Tananyag</a>
         <a href="#overview" class="nav-link" id="nav-overview">Áttekintés</a>
@@ -897,7 +856,7 @@
           <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
         </div>
 
-        <a href="#showcase" class="btn btn-primary btn-nav" id="btn-nav-action">Kipróbálás</a>
+        <a href="#screens" class="btn btn-primary btn-nav" id="btn-nav-action">Képernyők</a>
       </div>
     </div>
   </header>
@@ -918,11 +877,11 @@
         </p>
 
         <div class="hero-cta">
-          <a href="#showcase" class="btn btn-primary" id="hero-btn-primary">
-            Alkalmazás Felfedezése
+          <a href="#screens" class="btn btn-primary" id="hero-btn-primary">
+            Képernyők Megtekintése
           </a>
           <a href="#curriculum" class="btn btn-secondary" id="hero-btn-secondary">
-            Tananyag Megtekintése
+            Tananyag Áttekintése
           </a>
         </div>
 
@@ -951,90 +910,99 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE APP SHOWCASE / PHONE MOCKUP -->
-    <section id="showcase" class="showcase-section">
+    <!-- APP SCREENSHOTS GALLERY -->
+    <section id="screens" class="screens-section">
       <div class="section-header">
-        <span class="section-tag" id="tag-showcase">Élő Bemutató</span>
-        <h2 class="section-title" id="title-showcase">Ilyen egyszerű a gyakorlás</h2>
-        <p class="section-desc" id="desc-showcase">
-          Próbáld ki az interaktív írásmód-váltót közvetlenül az alábbi mintafelületen!
+        <span class="section-tag" id="tag-screens">Képernyőképek</span>
+        <h2 class="section-title" id="title-screens">Pillantás az alkalmazásba</h2>
+        <p class="section-desc" id="desc-screens">
+          Letisztult kezelőfelület, kanyargós tanulási útvonal, tapintható feladatok és azonnali kiejtés.
         </p>
       </div>
 
-      <div class="mockup-wrapper">
-        <!-- Interactive Mockup Screen -->
-        <div class="phone-container">
-          <div class="phone-notch"></div>
-          
-          <div class="app-screen-header">
-            <div class="app-stat-chip">
-              <span style="color:#FF9600;">🔥</span> <span>7</span>
-            </div>
-            
-            <!-- Dynamic Latin / Cyrillic Toggle inside mockup -->
-            <div class="app-script-switch">
-              <button class="app-script-btn active" id="mockup-btn-lat" onclick="setMockupScript('lat')">Latin</button>
-              <button class="app-script-btn" id="mockup-btn-cyr" onclick="setMockupScript('cyr')">Ћирилица</button>
-            </div>
-            
-            <div class="app-stat-chip">
-              <span style="color:#0066FF;">⚡</span> <span>180 XP</span>
+      <div class="screens-grid">
+        <!-- Screen 1: Tanösvény & Haladás -->
+        <div class="screen-card">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="assets/img/screen1.png" alt="Tanösvény & Haladás" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="screen-placeholder" style="display:flex;">
+                <span class="placeholder-badge" id="scr1-badge">1. Lépés</span>
+                <div class="placeholder-visual">
+                  <img src="assets/img/branko_explorer.png" alt="Felfedező Branko" class="placeholder-icon">
+                  <div class="placeholder-card-title" id="scr1-ui-title">Kanyargós Tanösvény</div>
+                  <div class="placeholder-card-sub" id="scr1-ui-sub">40 Tematikus Egység • A1–B2</div>
+                </div>
+                <div class="placeholder-ui-bar"><div class="placeholder-ui-progress" style="width: 75%;"></div></div>
+              </div>
             </div>
           </div>
-
-          <div class="app-quiz-card">
-            <div class="app-quiz-sub" id="mockup-quiz-sub">Kávézó & Rendelés</div>
-            <div class="app-quiz-phrase" id="mockup-quiz-phrase">Može jedna kafa sa mlekom?</div>
-            <div class="app-quiz-trans" id="mockup-quiz-trans">Kaphatok egy tejeskávét?</div>
-          </div>
-
-          <div class="app-options-list">
-            <div class="app-option selected" id="opt-1">
-              <span id="opt-1-text">Može jedna kafa sa mlekom?</span>
-              <span style="color:var(--primary); font-weight:700;">✓</span>
-            </div>
-            <div class="app-option" id="opt-2">
-              <span id="opt-2-text">Dva čaja, molim vas.</span>
-            </div>
-            <div class="app-option" id="opt-3">
-              <span id="opt-3-text">Gde je pekara?</span>
-            </div>
-          </div>
-
-          <button class="app-check-btn" id="mockup-check-btn">Kiejtés & Ellenőrzés</button>
+          <h4 class="screen-title" id="screen1-title">Tanösvény & Haladás</h4>
+          <p class="screen-desc" id="screen1-desc">Lépőkövekre bontott fejezetek, szintfelmérő és folyamatos fejlődéskövetés.</p>
         </div>
 
-        <!-- Explanatory Highlights -->
-        <div class="showcase-details">
-          <div class="showcase-feature-item">
-            <div class="showcase-icon-box">Aa</div>
-            <div>
-              <h4 class="showcase-item-title" id="showcase-f1-title">Két Egyenrangú Írásmód</h4>
-              <p class="showcase-item-desc" id="showcase-f1-desc">
-                A szerb nyelvben a latin és a cirill ábécé egyenrangú. A Serbióban egyetlen érintéssel válthatsz közöttük bármelyik leckében vagy szókártyán.
-              </p>
+        <!-- Screen 2: Interaktív Kvízek -->
+        <div class="screen-card">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="assets/img/screen2.png" alt="Interaktív Kvízek" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="screen-placeholder" style="display:flex;">
+                <span class="placeholder-badge" id="scr2-badge">2. Gyakorlás</span>
+                <div class="placeholder-visual">
+                  <img src="assets/img/branko_coffee.png" alt="Kávézó Branko" class="placeholder-icon">
+                  <div class="placeholder-card-title" id="scr2-ui-title">Élő Beszélt Nyelv</div>
+                  <div class="placeholder-card-sub" id="scr2-ui-sub">Mondatépítő & Valódi Rendelés</div>
+                </div>
+                <div class="placeholder-ui-bar"><div class="placeholder-ui-progress" style="width: 100%;"></div></div>
+              </div>
             </div>
           </div>
+          <h4 class="screen-title" id="screen2-title">Interaktív Kvízek</h4>
+          <p class="screen-desc" id="screen2-desc">Feleletválasztós kártyák, érintős mondatépítő és hallás utáni feladatok.</p>
+        </div>
 
-          <div class="showcase-feature-item">
-            <div class="showcase-icon-box">0s</div>
-            <div>
-              <h4 class="showcase-item-title" id="showcase-f2-title">Azonnali Offline Válaszidő</h4>
-              <p class="showcase-item-desc" id="showcase-f2-desc">
-                Nincs töltőképernyő és nincsenek hálózati hibák. Minden hanganyag és feladat előre generálva a telefonodon él.
-              </p>
+        <!-- Screen 3: Szótár & Kiejtés -->
+        <div class="screen-card">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="assets/img/screen3.png" alt="Szótár & Kiejtés" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="screen-placeholder" style="display:flex;">
+                <span class="placeholder-badge" id="scr3-badge">3. Szótár</span>
+                <div class="placeholder-visual">
+                  <img src="assets/img/branko_champion.png" alt="Bajnok Branko" class="placeholder-icon">
+                  <div class="placeholder-card-title" id="scr3-ui-title">Cirill ⇄ Latin Váltó</div>
+                  <div class="placeholder-card-sub" id="scr3-ui-sub">989 Szó • Stúdióminőségű Hang</div>
+                </div>
+                <div class="placeholder-ui-bar"><div class="placeholder-ui-progress" style="width: 60%;"></div></div>
+              </div>
             </div>
           </div>
+          <h4 class="screen-title" id="screen3-title">Szótár & Kiejtés</h4>
+          <p class="screen-desc" id="screen3-desc">Kereshető szótár ragozási táblázatokkal, példamondatokkal és lassított kiejtéssel.</p>
+        </div>
 
-          <div class="showcase-feature-item">
-            <div class="showcase-icon-box">💬</div>
-            <div>
-              <h4 class="showcase-item-title" id="showcase-f3-title">Valódi Beszélt Nyelv</h4>
-              <p class="showcase-item-desc" id="showcase-f3-desc">
-                A mesterkélt tükörfordítások helyett az autentikus balkáni kifejezéseket tanítjuk, hogy bátran megszólalhass Belgrádban vagy Újvidéken.
-              </p>
+        <!-- Screen 4: Ranglista & Széria -->
+        <div class="screen-card">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="assets/img/screen4.png" alt="Ranglista & Széria" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="screen-placeholder" style="display:flex;">
+                <span class="placeholder-badge" id="scr4-badge">4. Közösség</span>
+                <div class="placeholder-visual">
+                  <img src="assets/img/branko_head.png" alt="Branko Kabala" class="placeholder-icon">
+                  <div class="placeholder-card-title" id="scr4-ui-title">Napi Széria & XP</div>
+                  <div class="placeholder-card-sub" id="scr4-ui-sub">Láng Számláló & Baráti Ranglétra</div>
+                </div>
+                <div class="placeholder-ui-bar"><div class="placeholder-ui-progress" style="width: 90%;"></div></div>
+              </div>
             </div>
           </div>
+          <h4 class="screen-title" id="screen4-title">Ranglista & Széria</h4>
+          <p class="screen-desc" id="screen4-desc">Motiváló napi láng, XP ranglista a barátokkal és feloldható Branko avatarok.</p>
         </div>
       </div>
     </section>
@@ -1145,8 +1113,8 @@
         <h2 id="cta-title">Készen állsz a szerb nyelv felfedezésére?</h2>
         <p id="cta-desc">Csatlakozz te is, és tanulj napi 5 perc gyakorlással, reklámok és internetkényszer nélkül!</p>
         <div class="cta-buttons">
-          <a href="#showcase" class="btn btn-primary" id="cta-btn-start">
-            Kezdés Most
+          <a href="#screens" class="btn btn-primary" id="cta-btn-start">
+            Képernyők Megtekintése
           </a>
           <a href="#curriculum" class="btn btn-secondary" id="cta-btn-curriculum">
             Tananyag
@@ -1166,56 +1134,51 @@
     <p id="footer-copyright">© 2026 Serbio App. Minden jog fenntartva. Serbio — Tanulj Szerbül Mobilalkalmazás.</p>
   </footer>
 
-  <!-- DYNAMIC TRANSLATION & INTERACTIVITY SCRIPT -->
+  <!-- DYNAMIC TRANSLATION SCRIPT -->
   <script>
     let currentLang = 'hu';
-    let currentMockupScript = 'lat';
-
-    const mockupPhrases = {
-      lat: {
-        phrase: "Može jedna kafa sa mlekom?",
-        opt1: "Može jedna kafa sa mlekom?",
-        opt2: "Dva čaja, molim vas.",
-        opt3: "Gde je pekara?"
-      },
-      cyr: {
-        phrase: "Може једна кафа са млеком?",
-        opt1: "Може једна кафа са млеком?",
-        opt2: "Два чаја, молим вас.",
-        opt3: "Где је пекара?"
-      }
-    };
 
     const translations = {
       hu: {
         metaTitle: "Serbio — Tanulj Szerbül Mobilalkalmazás",
         metaDesc: "A Serbio egy modern, offline szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!",
-        navShowcase: "Alkalmazás",
+        navScreens: "Képernyők",
         navFeatures: "Funkciók",
         navCurriculum: "Tananyag",
         navOverview: "Áttekintés",
-        btnNavAction: "Kipróbálás",
+        btnNavAction: "Képernyők",
         heroBadgeText: "100% Offline Szerb Nyelvtanulás",
         heroTitle: 'Tanulj szerbül <span class="text-blue">magabiztosan</span> és kötetlenül.',
         heroDesc: "A Serbio egy modern mobilalkalmazás a valódi beszélt szerb nyelv elsajátításához. Párhuzamos latin és cirill írásmód, természetes kiejtés és teljes offline működés internet nélkül.",
-        heroBtnPrimary: "Alkalmazás Felfedezése",
-        heroBtnSecondary: "Tananyag Megtekintése",
+        heroBtnPrimary: "Képernyők Megtekintése",
+        heroBtnSecondary: "Tananyag Áttekintése",
         proofUnits: "40 Tanegység",
         proofAudio: "9 700+ Szerb Hang",
         proofOffline: "Nulla Adatforgalom",
         brankoSpeech: "Zdravo! Ja sam Branko!",
-        tagShowcase: "Élő Bemutató",
-        titleShowcase: "Ilyen egyszerű a gyakorlás",
-        descShowcase: "Próbáld ki az interaktív írásmód-váltót közvetlenül az alábbi mintafelületen!",
-        mockupQuizSub: "Kávézó & Rendelés",
-        mockupQuizTrans: "Kaphatok egy tejeskávét?",
-        mockupCheckBtn: "Kiejtés & Ellenőrzés",
-        showcaseF1Title: "Két Egyenrangú Írásmód",
-        showcaseF1Desc: "A szerb nyelvben a latin és a cirill ábécé egyenrangú. A Serbióban egyetlen érintéssel válthatsz közöttük bármelyik leckében vagy szókártyán.",
-        showcaseF2Title: "Azonnali Offline Válaszidő",
-        showcaseF2Desc: "Nincs töltőképernyő és nincsenek hálózati hibák. Minden hanganyag és feladat előre generálva a telefonodon él.",
-        showcaseF3Title: "Valódi Beszélt Nyelv",
-        showcaseF3Desc: "A mesterkélt tükörfordítások helyett az autentikus balkáni kifejezéseket tanítjuk, hogy bátran megszólalhass Belgrádban vagy Újvidéken.",
+        tagScreens: "Képernyőképek",
+        titleScreens: "Pillantás az alkalmazásba",
+        descScreens: "Letisztult kezelőfelület, kanyargós tanulási útvonal, tapintható feladatok és azonnali kiejtés.",
+        screen1Title: "Tanösvény & Haladás",
+        screen1Desc: "Lépőkövekre bontott fejezetek, szintfelmérő és folyamatos fejlődéskövetés.",
+        screen2Title: "Interaktív Kvízek",
+        screen2Desc: "Feleletválasztós kártyák, érintős mondatépítő és hallás utáni feladatok.",
+        screen3Title: "Szótár & Kiejtés",
+        screen3Desc: "Kereshető szótár ragozási táblázatokkal, példamondatokkal és lassított kiejtéssel.",
+        screen4Title: "Ranglista & Széria",
+        screen4Desc: "Motiváló napi láng, XP ranglista a barátokkal és feloldható Branko avatarok.",
+        scr1Badge: "1. Lépés",
+        scr1UiTitle: "Kanyargós Tanösvény",
+        scr1UiSub: "40 Tematikus Egység • A1–B2",
+        scr2Badge: "2. Gyakorlás",
+        scr2UiTitle: "Élő Beszélt Nyelv",
+        scr2UiSub: "Mondatépítő & Valódi Rendelés",
+        scr3Badge: "3. Szótár",
+        scr3UiTitle: "Cirill ⇄ Latin Váltó",
+        scr3UiSub: "989 Szó • Stúdióminőségű Hang",
+        scr4Badge: "4. Közösség",
+        scr4UiTitle: "Napi Széria & XP",
+        scr4UiSub: "Láng Számláló & Baráti Ranglétra",
         tagFeatures: "Miért a Serbio?",
         titleFeatures: "Korszerű Funkciók a Hatékony Tanuláshoz",
         descFeatures: "Minden részlet a gyors, zavartalan és magabiztos nyelvtanulást szolgálja.",
@@ -1248,7 +1211,7 @@
         statAudio: "Stúdióminőségű Hanganyag",
         ctaTitle: "Készen állsz a szerb nyelv felfedezésére?",
         ctaDesc: "Csatlakozz te is, és tanulj napi 5 perc gyakorlással, reklámok és internetkényszer nélkül!",
-        ctaBtnStart: "Kezdés Most",
+        ctaBtnStart: "Képernyők Megtekintése",
         ctaBtnCurriculum: "Tananyag Megtekintése",
         footerPrivacy: "Adatvédelmi Tájékoztató",
         footerTerms: "Felhasználási Feltételek",
@@ -1257,32 +1220,43 @@
       en: {
         metaTitle: "Serbio — Learn Serbian Mobile App",
         metaDesc: "Serbio is a modern, offline Serbian language learning app featuring Branko the bear. Learn Serbian without internet, in both Cyrillic and Latin scripts!",
-        navShowcase: "App",
+        navScreens: "Screenshots",
         navFeatures: "Features",
         navCurriculum: "Curriculum",
         navOverview: "Overview",
-        btnNavAction: "Try Demo",
+        btnNavAction: "Screenshots",
         heroBadgeText: "100% Offline Serbian Learning",
         heroTitle: 'Learn Serbian <span class="text-blue">confidently</span> and effectively.',
         heroDesc: "Serbio is a modern mobile app designed for mastering authentic spoken Serbian. Seamless dual-script support (Latin and Cyrillic), authentic pronunciation, and completely offline functionality.",
-        heroBtnPrimary: "Explore the App",
+        heroBtnPrimary: "View Screenshots",
         heroBtnSecondary: "View Curriculum",
         proofUnits: "40 Units",
         proofAudio: "9,700+ Serbian Audio",
         proofOffline: "Zero Data Usage",
         brankoSpeech: "Zdravo! I'm Branko!",
-        tagShowcase: "Interactive Demo",
-        titleShowcase: "Learning is this intuitive",
-        descShowcase: "Experience the real-time script switcher directly on the interactive preview below!",
-        mockupQuizSub: "Café & Ordering",
-        mockupQuizTrans: "Can I have a coffee with milk?",
-        mockupCheckBtn: "Pronunciation & Check",
-        showcaseF1Title: "Two Equal Alphabets",
-        showcaseF1Desc: "In Serbian, Latin and Cyrillic are equally official. Switch between scripts instantly with a single tap in any exercise.",
-        showcaseF2Title: "Instant Offline Response",
-        showcaseF2Desc: "Zero loading screens and no connection errors. All audio clips and exercises live locally on your device.",
-        showcaseF3Title: "Authentic Spoken Serbian",
-        showcaseF3Desc: "Instead of artificial textbook translations, learn real Balkan conversational phrases used every day in Belgrade and Novi Sad.",
+        tagScreens: "App Preview",
+        titleScreens: "A glimpse inside the app",
+        descScreens: "Intuitive interface, curved learning path, tactile exercises, and authentic audio pronunciation.",
+        screen1Title: "Learning Path & Progression",
+        screen1Desc: "Stepping stone lessons, placement test, and continuous progress tracking.",
+        screen2Title: "Interactive Quizzes",
+        screen2Desc: "Multiple choice cards, interactive sentence builder, and listening exercises.",
+        screen3Title: "Dictionary & Audio",
+        screen3Desc: "Searchable dictionary with conjugation tables, example sentences, and slow pronunciation.",
+        screen4Title: "Leaderboards & Streaks",
+        screen4Desc: "Motivating daily streak flames, XP leaderboard with friends, and collectible Branko avatars.",
+        scr1Badge: "Step 1",
+        scr1UiTitle: "Learning Path",
+        scr1UiSub: "40 Thematic Units • A1–B2",
+        scr2Badge: "Step 2",
+        scr2UiTitle: "Living Serbian",
+        scr2UiSub: "Sentence Builder & Ordering",
+        scr3Badge: "Step 3",
+        scr3UiTitle: "Cyrillic ⇄ Latin",
+        scr3UiSub: "989 Words • Studio Audio",
+        scr4Badge: "Step 4",
+        scr4UiTitle: "Daily Streak & XP",
+        scr4UiSub: "Flame Counter & Leagues",
         tagFeatures: "Why Serbio?",
         titleFeatures: "Modern Features for Effective Learning",
         descFeatures: "Crafted specifically for rapid, enjoyable, and reliable language acquisition.",
@@ -1315,7 +1289,7 @@
         statAudio: "Studio Audio Files",
         ctaTitle: "Ready to explore the Serbian language?",
         ctaDesc: "Join today and make progress in just 5 minutes a day, completely free of ads and internet requirements!",
-        ctaBtnStart: "Get Started",
+        ctaBtnStart: "View Screenshots",
         ctaBtnCurriculum: "View Curriculum",
         footerPrivacy: "Privacy Policy",
         footerTerms: "Terms of Service",
@@ -1324,32 +1298,43 @@
       ru: {
         metaTitle: "Serbio — Мобильное приложение для изучения сербского языка",
         metaDesc: "Serbio — это современное офлайн-приложение для изучения сербского языка с медвежонком Бранко. Учите сербский без интернета, на кириллице и латинице!",
-        navShowcase: "Приложение",
+        navScreens: "Скриншоты",
         navFeatures: "Возможности",
         navCurriculum: "Программа",
         navOverview: "Обзор",
-        btnNavAction: "Демо",
+        btnNavAction: "Скриншоты",
         heroBadgeText: "100% Офлайн обучение сербскому",
         heroTitle: 'Учите сербский язык <span class="text-blue">уверенно</span> и легко.',
         heroDesc: "Serbio — современное мобильное приложение для освоения живого разговорного сербского языка. Параллельная латиница и кириллица, естественное произношение и полная работа без интернета.",
-        heroBtnPrimary: "Обзор приложения",
+        heroBtnPrimary: "Смотреть скриншоты",
         heroBtnSecondary: "Учебная программа",
         proofUnits: "40 Модулей",
         proofAudio: "9 700+ Аудиозаписей",
         proofOffline: "Без расхода трафика",
         brankoSpeech: "Zdravo! Я Бранко!",
-        tagShowcase: "Интерактивное демо",
-        titleShowcase: "Учиться действительно просто",
-        descShowcase: "Попробуйте переключение между латиницей и кириллицей прямо на интерактивном макете ниже!",
-        mockupQuizSub: "Кафе и заказ",
-        mockupQuizTrans: "Можно один кофе с молоком?",
-        mockupCheckBtn: "Произношение и проверка",
-        showcaseF1Title: "Два равноправных алфавита",
-        showcaseF1Desc: "В сербском языке латиница и кириллица равноправны. В Serbio вы можете мгновенно переключаться между ними в один клик.",
-        showcaseF2Title: "Мгновенный офлайн отклик",
-        showcaseF2Desc: "Никаких экранов загрузки и сетевых ошибок. Все аудиозаписи и упражнения хранятся прямо на вашем телефоне.",
-        showcaseF3Title: "Живой разговорный язык",
-        showcaseF3Desc: "Вместо искусственных книжных фраз мы обучаем живому языку, на котором говорят в Белграде и Нови-Саде.",
+        tagScreens: "Обзор приложения",
+        titleScreens: "Взгляд на приложение",
+        descScreens: "Продуманный интерфейс, извилистая тропа обучения, интерактивные задания и живое произношение.",
+        screen1Title: "Тропа обучения и прогресс",
+        screen1Desc: "Уроки по шагам, стартовое тестирование уровня и наглядное отслеживание прогресса.",
+        screen2Title: "Интерактивные тесты",
+        screen2Desc: "Карточки с выбором ответа, конструктор фраз и упражнения на восприятие на слух.",
+        screen3Title: "Словарь и произношение",
+        screen3Desc: "Удобный словарь с таблицами спряжений, примерами фраз и замедленным аудио.",
+        screen4Title: "Рейтинги и серии дней",
+        screen4Desc: "Мотивирующий огонь серий, таблица лидеров с друзьями и коллекционные аватары Бранко.",
+        scr1Badge: "Шаг 1",
+        scr1UiTitle: "Тропа обучения",
+        scr1UiSub: "40 Тематических модулей • A1–B2",
+        scr2Badge: "Шаг 2",
+        scr2UiTitle: "Живой сербский",
+        scr2UiSub: "Конструктор фраз и заказ",
+        scr3Badge: "Шаг 3",
+        scr3UiTitle: "Кириллица ⇄ Латиница",
+        scr3UiSub: "989 Слов • Студийный звук",
+        scr4Badge: "Шаг 4",
+        scr4UiTitle: "Серии дней и XP",
+        scr4UiSub: "Счетчик серий и рейтинг",
         tagFeatures: "Преимущества",
         titleFeatures: "Современные функции для эффективного обучения",
         descFeatures: "Каждая деталь создана для быстрого, увлекательного и надежного освоения языка.",
@@ -1382,30 +1367,13 @@
         statAudio: "Студийных аудиозаписей",
         ctaTitle: "Готовы открыть для себя сербский язык?",
         ctaDesc: "Присоединяйтесь и учитесь по 5 минут в день — без рекламы и без зависимости от интернета!",
-        ctaBtnStart: "Начать сейчас",
+        ctaBtnStart: "Смотреть скриншоты",
         ctaBtnCurriculum: "Учебная программа",
         footerPrivacy: "Политика конфиденциальности",
         footerTerms: "Условия использования",
         footerCopyright: "© 2026 Serbio App. Все права защищены. Serbio — Изучение сербского языка."
       }
     };
-
-    function setMockupScript(script) {
-      currentMockupScript = script;
-      document.getElementById('mockup-btn-lat').classList.toggle('active', script === 'lat');
-      document.getElementById('mockup-btn-cyr').classList.toggle('active', script === 'cyr');
-      
-      const p = mockupPhrases[script];
-      const phraseEl = document.getElementById('mockup-quiz-phrase');
-      phraseEl.style.opacity = '0';
-      setTimeout(() => {
-        phraseEl.textContent = p.phrase;
-        document.getElementById('opt-1-text').textContent = p.opt1;
-        document.getElementById('opt-2-text').textContent = p.opt2;
-        document.getElementById('opt-3-text').textContent = p.opt3;
-        phraseEl.style.opacity = '1';
-      }, 150);
-    }
 
     function setLang(lang) {
       if (!translations[lang]) return;
@@ -1421,7 +1389,7 @@
       document.getElementById('meta-title').textContent = t.metaTitle;
       document.getElementById('meta-desc').setAttribute('content', t.metaDesc);
 
-      document.getElementById('nav-showcase').textContent = t.navShowcase;
+      document.getElementById('nav-screens').textContent = t.navScreens;
       document.getElementById('nav-features').textContent = t.navFeatures;
       document.getElementById('nav-curriculum').textContent = t.navCurriculum;
       document.getElementById('nav-overview').textContent = t.navOverview;
@@ -1437,19 +1405,30 @@
       document.getElementById('proof-offline').textContent = t.proofOffline;
       document.getElementById('branko-speech').textContent = t.brankoSpeech;
 
-      document.getElementById('tag-showcase').textContent = t.tagShowcase;
-      document.getElementById('title-showcase').textContent = t.titleShowcase;
-      document.getElementById('desc-showcase').textContent = t.descShowcase;
-      document.getElementById('mockup-quiz-sub').textContent = t.mockupQuizSub;
-      document.getElementById('mockup-quiz-trans').textContent = t.mockupQuizTrans;
-      document.getElementById('mockup-check-btn').textContent = t.mockupCheckBtn;
+      document.getElementById('tag-screens').textContent = t.tagScreens;
+      document.getElementById('title-screens').textContent = t.titleScreens;
+      document.getElementById('desc-screens').textContent = t.descScreens;
+      document.getElementById('screen1-title').textContent = t.screen1Title;
+      document.getElementById('screen1-desc').textContent = t.screen1Desc;
+      document.getElementById('screen2-title').textContent = t.screen2Title;
+      document.getElementById('screen2-desc').textContent = t.screen2Desc;
+      document.getElementById('screen3-title').textContent = t.screen3Title;
+      document.getElementById('screen3-desc').textContent = t.screen3Desc;
+      document.getElementById('screen4-title').textContent = t.screen4Title;
+      document.getElementById('screen4-desc').textContent = t.screen4Desc;
 
-      document.getElementById('showcase-f1-title').textContent = t.showcaseF1Title;
-      document.getElementById('showcase-f1-desc').textContent = t.showcaseF1Desc;
-      document.getElementById('showcase-f2-title').textContent = t.showcaseF2Title;
-      document.getElementById('showcase-f2-desc').textContent = t.showcaseF2Desc;
-      document.getElementById('showcase-f3-title').textContent = t.showcaseF3Title;
-      document.getElementById('showcase-f3-desc').textContent = t.showcaseF3Desc;
+      document.getElementById('scr1-badge').textContent = t.scr1Badge;
+      document.getElementById('scr1-ui-title').textContent = t.scr1UiTitle;
+      document.getElementById('scr1-ui-sub').textContent = t.scr1UiSub;
+      document.getElementById('scr2-badge').textContent = t.scr2Badge;
+      document.getElementById('scr2-ui-title').textContent = t.scr2UiTitle;
+      document.getElementById('scr2-ui-sub').textContent = t.scr2UiSub;
+      document.getElementById('scr3-badge').textContent = t.scr3Badge;
+      document.getElementById('scr3-ui-title').textContent = t.scr3UiTitle;
+      document.getElementById('scr3-ui-sub').textContent = t.scr3UiSub;
+      document.getElementById('scr4-badge').textContent = t.scr4Badge;
+      document.getElementById('scr4-ui-title').textContent = t.scr4UiTitle;
+      document.getElementById('scr4-ui-sub').textContent = t.scr4UiSub;
 
       document.getElementById('tag-features').textContent = t.tagFeatures;
       document.getElementById('title-features').textContent = t.titleFeatures;
