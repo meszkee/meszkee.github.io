@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serbio — Tanulj Szerbül Mobilalkalmazás</title>
+  <title id="meta-title">Serbio — Tanulj Szerbül Mobilalkalmazás</title>
   <meta name="google-site-verification" content="google5a0ad7470a84e2ff" />
-  <meta name="description" content="A Serbio egy modern, játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!">
+  <meta name="description" id="meta-desc" content="A Serbio egy modern, játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 14px 24px;
+      padding: 12px 24px;
     }
     .header-container {
       max-width: 1100px;
@@ -55,6 +55,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
     .brand {
       display: flex;
@@ -76,32 +77,74 @@
       color: var(--primary-dark);
       letter-spacing: -0.5px;
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
     }
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       transition: color 0.2s;
     }
     .nav-links a:hover {
       color: var(--secondary);
     }
+
+    /* LANGUAGE SELECTOR PILL */
+    .lang-picker {
+      display: inline-flex;
+      background: #F1F5F9;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      gap: 4px;
+    }
+    .lang-opt {
+      border: none;
+      background: transparent;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .lang-opt.active {
+      background: #FFFFFF;
+      color: var(--secondary-dark);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
     .btn-nav {
       background: var(--primary);
       color: #FFFFFF !important;
-      padding: 10px 20px;
+      padding: 8px 18px;
       border-radius: 999px;
-      box-shadow: 0 4px 0 var(--primary-dark);
+      box-shadow: 0 3px 0 var(--primary-dark);
+      font-size: 14px !important;
       transition: transform 0.1s, box-shadow 0.1s;
     }
     .btn-nav:active {
       transform: translateY(2px);
-      box-shadow: 0 2px 0 var(--primary-dark);
+      box-shadow: 0 1px 0 var(--primary-dark);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
     }
 
     /* HERO */
@@ -443,46 +486,57 @@
         <img src="assets/img/icon-512.png" alt="Serbio Logo" class="brand-img">
         <span class="brand-text">Serbio</span>
       </a>
-      <nav class="nav-links">
-        <a href="#features">Funkciók</a>
-        <a href="https://meszkee.github.io/serbio-privacy-policy/">Adatvédelem</a>
-        <a href="https://meszkee.github.io/serbio-privacy-policy/#terms">ÁSZF</a>
-        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="btn-nav">Adatvédelmi Nyilatkozat</a>
-      </nav>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#features" id="nav-features">Funkciók</a>
+          <a href="https://meszkee.github.io/serbio-privacy-policy/" id="nav-privacy">Adatvédelem</a>
+          <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" id="nav-terms">ÁSZF</a>
+        </nav>
+
+        <!-- 3-Language Picker -->
+        <div class="lang-picker">
+          <button class="lang-opt active" id="btn-hu" onclick="setLang('hu')">🇭🇺 HU</button>
+          <button class="lang-opt" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+          <button class="lang-opt" id="btn-ru" onclick="setLang('ru')">🇷🇺 RU</button>
+        </div>
+
+        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="btn-nav" id="btn-header-policy">Adatvédelem</a>
+      </div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-left">
-      <div class="badge-pill">
+      <div class="badge-pill" id="hero-badge">
         <span>🇷🇸</span> 100% Offline Szerb Nyelvtanulás
       </div>
-      <h1>Tanulj szerbül <span class="highlight">könnyedén</span>, játékosan.</h1>
-      <p class="hero-desc">
+      <h1 id="hero-title">Tanulj szerbül <span class="highlight">könnyedén</span>, játékosan.</h1>
+      <p class="hero-desc" id="hero-desc">
         A Serbio egy modern, Duolingo-stílusú mobilalkalmazás, amivel életszerű szerb kifejezéseket tanulhatsz meg — akár repülőgép üzemmódban, internet nélkül is!
       </p>
 
       <div class="hero-cta">
-        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green">
+        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green" id="cta-btn-main">
           🚀 Ismerd meg az appot
         </a>
-        <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" class="duo-button btn-outline">
+        <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" class="duo-button btn-outline" id="cta-btn-terms">
           📖 ÁSZF & Szabályzat
         </a>
       </div>
 
       <div class="social-proof">
-        <span>⭐ 40 Teljes Tantervi Egység</span>
+        <span id="proof-units">⭐ 40 Teljes Tantervi Egység</span>
         <span>•</span>
-        <span>🎙️ 9 700+ Autentikus Szerb Hang</span>
+        <span id="proof-audio">🎙️ 9 700+ Autentikus Szerb Hang</span>
       </div>
     </div>
 
     <div class="hero-right">
       <div class="mascot-container">
         <img src="assets/img/branko_waving.png" alt="Branko a kabalamaci" class="branko-hero-img">
-        <div class="speech-bubble">
+        <div class="speech-bubble" id="branko-speech">
           Zdravo! Ja sam Branko! 🇷🇸
         </div>
       </div>
@@ -493,33 +547,33 @@
   <section id="features" class="section">
     <div class="section-container">
       <div class="section-title">
-        <h2>Miért fogod imádni a Serbiót?</h2>
-        <p>Gondosan felépített leckék, valódi balkáni beszélt nyelv és motiváló játékos elemek.</p>
+        <h2 id="section-features-title">Miért fogod imádni a Serbiót?</h2>
+        <p id="section-features-sub">Gondosan felépített leckék, valódi balkáni beszélt nyelv és motiváló játékos elemek.</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card">
           <img src="assets/img/branko_explorer.png" alt="Offline Felfedező Branko" class="feature-icon-img">
-          <h3>✈️ 100% Offline Működés</h3>
-          <p>Minden lecke, kvíz, szótár és hangfájl a telefonodon él. Utazás közben, repülőn vagy határátkeléskor is tanulhatsz net nélkül.</p>
+          <h3 id="card1-title">✈️ 100% Offline Működés</h3>
+          <p id="card1-desc">Minden lecke, kvíz, szótár és hangfájl a telefonodon él. Utazás közben, repülőn vagy határátkeléskor is tanulhatsz net nélkül.</p>
         </div>
 
         <div class="feature-card">
           <img src="assets/img/branko_coffee.png" alt="Kávézó Branko" class="feature-icon-img">
-          <h3>☕ Élő, Autentikus Szerb</h3>
-          <p>Tükörfordítások helyett a valódi belgrádi beszélt nyelvet tanítjuk. Rendelj magabiztosan a pékségben (pekara) vagy a kávézóban!</p>
+          <h3 id="card2-title">☕ Élő, Autentikus Szerb</h3>
+          <p id="card2-desc">Tükörfordítások helyett a valódi belgrádi beszélt nyelvet tanítjuk. Rendelj magabiztosan a pékségben (pekara) vagy a kávézóban!</p>
         </div>
 
         <div class="feature-card">
           <img src="assets/img/branko_champion.png" alt="Bajnok Branko" class="feature-icon-img">
-          <h3>🔤 Két Egyenrangú Írásmód</h3>
-          <p>A szerb nyelv kincse a két írásmód: a cirill és a latin. Egyetlen gombnyomással válthatsz az ábécék között minden leckében.</p>
+          <h3 id="card3-title">🔤 Két Egyenrangú Írásmód</h3>
+          <p id="card3-desc">A szerb nyelv kincse a két írásmód: a cirill és a latin. Egyetlen gombnyomással válthatsz az ábécék között minden leckében.</p>
         </div>
 
         <div class="feature-card">
           <img src="assets/img/branko_head.png" alt="Branko Kabalamaci" class="feature-icon-img">
-          <h3>🐻 Branko, a Tanulótársad</h3>
-          <p>Napi célok, lángoló streak-számláló, XP ranglista a barátokkal és barátságos motiváció minden elvégzett egység után.</p>
+          <h3 id="card4-title">🐻 Branko, a Tanulótársad</h3>
+          <p id="card4-desc">Napi célok, lángoló streak-számláló, XP ranglista a barátokkal és barátságos motiváció minden elvégzett egység után.</p>
         </div>
       </div>
     </div>
@@ -530,19 +584,19 @@
     <div class="stats-grid">
       <div class="stat-item">
         <h3>40</h3>
-        <p>Kidolgozott Tanegység (A1–B2)</p>
+        <p id="stat-units">Kidolgozott Tanegység (A1–B2)</p>
       </div>
       <div class="stat-item">
         <h3>260</h3>
-        <p>Interaktív Lépőkő Állomás</p>
+        <p id="stat-nodes">Interaktív Lépőkő Állomás</p>
       </div>
       <div class="stat-item">
         <h3>1 976</h3>
-        <p>Autentikus Élő Példamondat</p>
+        <p id="stat-sentences">Autentikus Élő Példamondat</p>
       </div>
       <div class="stat-item">
         <h3>9 711</h3>
-        <p>Stúdióminőségű Hanganyag</p>
+        <p id="stat-audio">Stúdióminőségű Hanganyag</p>
       </div>
     </div>
   </section>
@@ -550,9 +604,9 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-card">
-      <h2>Készen állsz a szerb nyelv felfedezésére?</h2>
-      <p>Csatlakozz te is, és sajátítsd el a szerb nyelvet napi 5 perc gyakorlással, a saját tempódban!</p>
-      <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green">
+      <h2 id="cta-box-title">Készen állsz a szerb nyelv felfedezésére?</h2>
+      <p id="cta-box-desc">Csatlakozz te is, és sajátítsd el a szerb nyelvet napi 5 perc gyakorlással, a saját tempódban!</p>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green" id="cta-box-btn">
         🐻 Adatvédelem & Részletek
       </a>
     </div>
@@ -561,14 +615,201 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-links">
-      <a href="https://meszkee.github.io/serbio-privacy-policy/">Adatvédelmi Irányelvek (Privacy Policy)</a>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/" id="footer-privacy">Adatvédelmi Irányelvek (Privacy Policy)</a>
       <span>•</span>
-      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms">Felhasználási Feltételek (Terms of Service)</a>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" id="footer-terms">Felhasználási Feltételek (Terms of Service)</a>
       <span>•</span>
       <a href="https://github.com/meszkee/tanulj-szerbul">GitHub Projekt</a>
     </div>
-    <p>© 2026 Serbio App. Minden jog fenntartva. Készült Duolingo-stílusú játékos nyelvtanuláshoz.</p>
+    <p id="footer-copyright">© 2026 Serbio App. Minden jog fenntartva. Készült Duolingo-stílusú játékos nyelvtanuláshoz.</p>
   </footer>
 
+  <script>
+    const translations = {
+      hu: {
+        metaTitle: "Serbio — Tanulj Szerbül Mobilalkalmazás",
+        metaDesc: "A Serbio egy modern, játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!",
+        navFeatures: "Funkciók",
+        navPrivacy: "Adatvédelem",
+        navTerms: "ÁSZF",
+        btnHeaderPolicy: "Adatvédelem",
+        heroBadge: "<span>🇷🇸</span> 100% Offline Szerb Nyelvtanulás",
+        heroTitle: 'Tanulj szerbül <span class="highlight">könnyedén</span>, játékosan.',
+        heroDesc: "A Serbio egy modern, Duolingo-stílusú mobilalkalmazás, amivel életszerű szerb kifejezéseket tanulhatsz meg — akár repülőgép üzemmódban, internet nélkül is!",
+        ctaBtnMain: "🚀 Ismerd meg az appot",
+        ctaBtnTerms: "📖 ÁSZF & Szabályzat",
+        proofUnits: "⭐ 40 Teljes Tantervi Egység",
+        proofAudio: "🎙️ 9 700+ Autentikus Szerb Hang",
+        brankoSpeech: "Zdravo! Ja sam Branko! 🇷🇸",
+        sectionFeaturesTitle: "Miért fogod imádni a Serbiót?",
+        sectionFeaturesSub: "Gondosan felépített leckék, valódi balkáni beszélt nyelv és motiváló játékos elemek.",
+        card1Title: "✈️ 100% Offline Működés",
+        card1Desc: "Minden lecke, kvíz, szótár és hangfájl a telefonodon él. Utazás közben, repülőn vagy határátkeléskor is tanulhatsz net nélkül.",
+        card2Title: "☕ Élő, Autentikus Szerb",
+        card2Desc: "Tükörfordítások helyett a valódi belgrádi beszélt nyelvet tanítjuk. Rendelj magabiztosan a pékségben (pekara) vagy a kávézóban!",
+        card3Title: "🔤 Két Egyenrangú Írásmód",
+        card3Desc: "A szerb nyelv kincse a két írásmód: a cirill és a latin. Egyetlen gombnyomással válthatsz az ábécék között minden leckében.",
+        card4Title: "🐻 Branko, a Tanulótársad",
+        card4Desc: "Napi célok, lángoló streak-számláló, XP ranglista a barátokkal és barátságos motiváció minden elvégzett egység után.",
+        statUnits: "Kidolgozott Tanegység (A1–B2)",
+        statNodes: "Interaktív Lépőkő Állomás",
+        statSentences: "Autentikus Élő Példamondat",
+        statAudio: "Stúdióminőségű Hanganyag",
+        ctaBoxTitle: "Készen állsz a szerb nyelv felfedezésére?",
+        ctaBoxDesc: "Csatlakozz te is, és sajátítsd el a szerb nyelvet napi 5 perc gyakorlással, a saját tempódban!",
+        ctaBoxBtn: "🐻 Adatvédelem & Részletek",
+        footerPrivacy: "Adatvédelmi Irányelvek (Privacy Policy)",
+        footerTerms: "Felhasználási Feltételek (Terms of Service)",
+        footerCopyright: "© 2026 Serbio App. Minden jog fenntartva. Készült Duolingo-stílusú játékos nyelvtanuláshoz."
+      },
+      en: {
+        metaTitle: "Serbio — Learn Serbian Mobile App",
+        metaDesc: "Serbio is a modern, gamified, offline Duolingo-style Serbian language learning app featuring Branko the bear. Learn Serbian without internet, in both Cyrillic and Latin scripts!",
+        navFeatures: "Features",
+        navPrivacy: "Privacy Policy",
+        navTerms: "Terms",
+        btnHeaderPolicy: "Privacy Policy",
+        heroBadge: "<span>🇷🇸</span> 100% Offline Serbian Learning",
+        heroTitle: 'Learn Serbian <span class="highlight">effortlessly</span> & playfully.',
+        heroDesc: "Serbio is a modern, Duolingo-style mobile application designed to teach authentic everyday Serbian — fully functional offline in airplane mode!",
+        ctaBtnMain: "🚀 Explore the App",
+        ctaBtnTerms: "📖 Terms of Service",
+        proofUnits: "⭐ 40 Complete Curriculum Units",
+        proofAudio: "🎙️ 9,700+ Authentic Serbian Audio",
+        brankoSpeech: "Zdravo! I'm Branko! 🇷🇸",
+        sectionFeaturesTitle: "Why You Will Love Serbio",
+        sectionFeaturesSub: "Carefully designed lessons, authentic conversational Balkan Serbian, and motivating gamified features.",
+        card1Title: "✈️ 100% Offline-First",
+        card1Desc: "Every lesson, quiz, dictionary entry, and audio file lives directly on your phone. Learn without internet while traveling, on planes, or abroad.",
+        card2Title: "☕ Authentic Everyday Serbian",
+        card2Desc: "Instead of literal textbook translations, we teach real conversational Serbian. Order with confidence in the bakery (pekara) or cafe!",
+        card3Title: "🔤 Two Equal Alphabets",
+        card3Desc: "Serbian uniquely embraces both Cyrillic and Latin. Switch between scripts with a single tap anywhere in the app.",
+        card4Title: "🐻 Branko, Your Study Buddy",
+        card4Desc: "Daily goals, flame streak tracking, friend leaderboards, and friendly celebrations as you progress through each unit.",
+        statUnits: "Curriculum Units (A1–B2)",
+        statNodes: "Interactive Stepping Stones",
+        statSentences: "Authentic Example Sentences",
+        statAudio: "Studio-Quality Voice Audio",
+        ctaBoxTitle: "Ready to Discover the Serbian Language?",
+        ctaBoxDesc: "Join in and master Serbian with just 5 minutes of practice a day at your own pace!",
+        ctaBoxBtn: "🐻 Privacy Policy & Details",
+        footerPrivacy: "Privacy Policy",
+        footerTerms: "Terms of Service",
+        footerCopyright: "© 2026 Serbio App. All rights reserved. Built for gamified language learning."
+      },
+      ru: {
+        metaTitle: "Serbio — Изучайте Сербский Язык",
+        metaDesc: "Serbio — это современное, игровое, офлайн-приложение в стиле Duolingo для изучения сербского языка с медвежонком Бранко. Учите сербский без интернета, на кириллице и латинице!",
+        navFeatures: "Функции",
+        navPrivacy: "Конфиденциальность",
+        navTerms: "Условия",
+        btnHeaderPolicy: "Политика конфиденциальности",
+        heroBadge: "<span>🇷🇸</span> 100% Офлайн изучение сербского",
+        heroTitle: 'Учите сербский <span class="highlight">легко</span> и увлекательно.',
+        heroDesc: "Serbio — это современное мобильное приложение в стиле Duolingo для изучения живой сербской речи — работает на 100% офлайн даже в режиме полета!",
+        ctaBtnMain: "🚀 Узнать больше",
+        ctaBtnTerms: "📖 Условия использования",
+        proofUnits: "⭐ 40 полных учебных разделов",
+        proofAudio: "🎙️ 9 700+ аутентичных сербских аудио",
+        brankoSpeech: "Zdravo! Я Бранко! 🇷🇸",
+        sectionFeaturesTitle: "Почему вам понравится Serbio?",
+        sectionFeaturesSub: "Тщательно продуманные уроки, живой разговорный сербский язык и мотивирующие элементы геймификации.",
+        card1Title: "✈️ 100% Офлайн-режим",
+        card1Desc: "Все уроки, тесты, словарь и аудиозаписи хранятся на вашем телефоне. Учитесь в путешествиях, самолете или без роуминга.",
+        card2Title: "☕ Живой разговорный сербский",
+        card2Desc: "Никаких механических переводов — только живая речь Белграда. Уверенно заказывайте в пекарне (пекара) или в кафе!",
+        card3Title: "🔤 Две равноправные азбуки",
+        card3Desc: "Уникальность сербского языка — в кириллице и латинице. Переключайтесь между ними в один клик в любом уроке.",
+        card4Title: "🐻 Медвежонок Бранко",
+        card4Desc: "Ежедневные цели, огненная серия дней, рейтинг с друзьями и поддержка талисмана на каждом шагу.",
+        statUnits: "Учебных разделов (A1–B2)",
+        statNodes: "Интерактивных станций",
+        statSentences: "Живых примеров предложений",
+        statAudio: "Студийных аудиозаписей",
+        ctaBoxTitle: "Готовы открыть для себя сербский язык?",
+        ctaBoxDesc: "Присоединяйтесь и осваивайте сербский язык всего за 5 минут в день в комфортном темпе!",
+        ctaBoxBtn: "🐻 Конфиденциальность и детали",
+        footerPrivacy: "Политика конфиденциальности",
+        footerTerms: "Условия использования",
+        footerCopyright: "© 2026 Serbio App. Все права защищены. Создано для игрового изучения языков."
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang] || translations.hu;
+
+      // Update button active states
+      document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+
+      // Update document text
+      document.getElementById('meta-title').textContent = t.metaTitle;
+      document.getElementById('nav-features').textContent = t.navFeatures;
+      document.getElementById('nav-privacy').textContent = t.navPrivacy;
+      document.getElementById('nav-terms').textContent = t.navTerms;
+      document.getElementById('btn-header-policy').textContent = t.btnHeaderPolicy;
+
+      document.getElementById('hero-badge').innerHTML = t.heroBadge;
+      document.getElementById('hero-title').innerHTML = t.heroTitle;
+      document.getElementById('hero-desc').textContent = t.heroDesc;
+      document.getElementById('cta-btn-main').textContent = t.ctaBtnMain;
+      document.getElementById('cta-btn-terms').textContent = t.ctaBtnTerms;
+      document.getElementById('proof-units').textContent = t.proofUnits;
+      document.getElementById('proof-audio').textContent = t.proofAudio;
+      document.getElementById('branko-speech').textContent = t.brankoSpeech;
+
+      document.getElementById('section-features-title').textContent = t.sectionFeaturesTitle;
+      document.getElementById('section-features-sub').textContent = t.sectionFeaturesSub;
+
+      document.getElementById('card1-title').textContent = t.card1Title;
+      document.getElementById('card1-desc').textContent = t.card1Desc;
+      document.getElementById('card2-title').textContent = t.card2Title;
+      document.getElementById('card2-desc').textContent = t.card2Desc;
+      document.getElementById('card3-title').textContent = t.card3Title;
+      document.getElementById('card3-desc').textContent = t.card3Desc;
+      document.getElementById('card4-title').textContent = t.card4Title;
+      document.getElementById('card4-desc').textContent = t.card4Desc;
+
+      document.getElementById('stat-units').textContent = t.statUnits;
+      document.getElementById('stat-nodes').textContent = t.statNodes;
+      document.getElementById('stat-sentences').textContent = t.statSentences;
+      document.getElementById('stat-audio').textContent = t.statAudio;
+
+      document.getElementById('cta-box-title').textContent = t.ctaBoxTitle;
+      document.getElementById('cta-box-desc').textContent = t.ctaBoxDesc;
+      document.getElementById('cta-box-btn').textContent = t.ctaBoxBtn;
+
+      document.getElementById('footer-privacy').textContent = t.footerPrivacy;
+      document.getElementById('footer-terms').textContent = t.footerTerms;
+      document.getElementById('footer-copyright').textContent = t.footerCopyright;
+
+      try {
+        localStorage.setItem('serbio_lang', lang);
+      } catch {}
+    }
+
+    // Auto-detect browser language or read localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('serbio_lang');
+      } catch {}
+
+      if (saved && (saved === 'hu' || saved === 'en' || saved === 'ru')) {
+        setLang(saved);
+      } else {
+        const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        if (navLang.startsWith('en')) {
+          setLang('en');
+        } else if (navLang.startsWith('ru')) {
+          setLang('ru');
+        } else {
+          setLang('hu');
+        }
+      }
+    });
+  </script>
 </body>
 </html>
