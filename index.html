@@ -5,764 +5,1457 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="meta-title">Serbio — Tanulj Szerbül Mobilalkalmazás</title>
   <meta name="google-site-verification" content="google5a0ad7470a84e2ff" />
-  <meta name="description" id="meta-desc" content="A Serbio egy modern, játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!">
+  <meta name="description" id="meta-desc" content="A Serbio egy modern, offline szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #58CC02;
-      --primary-dark: #46A302;
-      --secondary: #1CB0F6;
-      --secondary-dark: #1899D6;
-      --accent: #FF9600;
-      --accent-dark: #E58700;
-      --serbian-red: #ED1C24;
+      --primary: #0066FF;
+      --primary-hover: #0052CC;
+      --primary-light: #EBF3FF;
+      --primary-soft: #D6E4FF;
       --serbian-blue: #0C4076;
-      --bg: #F7F9FA;
+      --serbian-red: #C6363C;
+      --bg: #F8FAFC;
       --card-bg: #FFFFFF;
-      --text: #2B2B2B;
-      --text-muted: #6B7280;
-      --border: #E5E7EB;
-      --radius: 20px;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --text-subtle: #94A3B8;
+      --border: #E2E8F0;
+      --border-focus: #93C5FD;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(15,23,42,0.06);
+      --shadow-lg: 0 10px 25px rgba(15,23,42,0.08);
+      --shadow-primary: 0 6px 20px rgba(0,102,255,0.28);
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body {
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      font-size: 16px;
     }
 
-    /* NAV */
+    h1, h2, h3, h4, .brand-text, .btn, .nav-link {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* NAVIGATION */
     header {
-      background: #FFFFFF;
-      border-bottom: 2px solid var(--border);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 100;
-      padding: 12px 24px;
+      z-index: 1000;
+      padding: 12px 20px;
+      transition: all 0.2s ease;
     }
-    .header-container {
-      max-width: 1100px;
+
+    .nav-container {
+      max-width: 1140px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
     }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
-    }
-    .brand-img {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 3px 0 var(--border);
-    }
-    .brand-text {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--primary-dark);
-      letter-spacing: -0.5px;
-    }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover {
-      color: var(--secondary);
     }
 
-    /* LANGUAGE SELECTOR PILL */
-    .lang-picker {
-      display: inline-flex;
-      background: #F1F5F9;
-      padding: 4px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      gap: 4px;
+    .brand-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0, 102, 255, 0.15);
     }
-    .lang-opt {
-      border: none;
-      background: transparent;
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 13px;
+
+    .brand-text {
+      font-size: 22px;
       font-weight: 800;
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: all 0.2s ease;
+      color: var(--serbian-blue);
+      letter-spacing: -0.4px;
+    }
+
+    .brand-text span {
+      color: var(--primary);
+    }
+
+    .nav-menu {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 24px;
     }
-    .lang-opt.active {
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* LANGUAGE SELECTOR */
+    .lang-selector {
+      display: inline-flex;
+      background: #F1F5F9;
+      padding: 3px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn.active {
       background: #FFFFFF;
-      color: var(--secondary-dark);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(0, 102, 255, 0.35);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(0, 102, 255, 0.25);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
     }
 
     .btn-nav {
-      background: var(--primary);
-      color: #FFFFFF !important;
-      padding: 8px 18px;
-      border-radius: 999px;
-      box-shadow: 0 3px 0 var(--primary-dark);
-      font-size: 14px !important;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-    .btn-nav:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 var(--primary-dark);
-    }
-
-    @media (max-width: 860px) {
-      .nav-links {
-        display: none;
-      }
+      padding: 7px 16px;
+      font-size: 13px;
+      border-radius: var(--radius-full);
     }
 
     /* HERO */
     .hero {
-      max-width: 1100px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 50px 20px 70px;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       align-items: center;
       gap: 40px;
     }
-    @media (max-width: 860px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 40px;
-      }
-      .hero-left {
-        order: 2;
-      }
-      .hero-right {
-        order: 1;
-      }
-    }
-    .badge-pill {
+
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #E8F7FE;
-      color: var(--secondary-dark);
-      font-weight: 800;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
       font-size: 13px;
       padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid #BAE3FB;
+      border-radius: var(--radius-full);
       margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      border: 1px solid var(--primary-soft);
     }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
     h1 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 48px;
+      font-size: clamp(32px, 4.5vw, 48px);
       font-weight: 800;
       line-height: 1.15;
-      color: #1A1A1A;
-      margin-bottom: 20px;
-      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 18px;
+      letter-spacing: -0.8px;
     }
-    h1 .highlight {
+
+    h1 .text-blue {
       color: var(--primary);
     }
+
     .hero-desc {
-      font-size: 19px;
+      font-size: clamp(16px, 2vw, 18px);
       color: var(--text-muted);
-      margin-bottom: 32px;
-      font-weight: 600;
-      line-height: 1.5;
+      margin-bottom: 28px;
+      line-height: 1.6;
+      max-width: 540px;
     }
+
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 860px) {
-      .hero-cta {
-        justify-content: center;
-      }
-    }
-    .duo-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      padding: 16px 32px;
-      border-radius: 16px;
-      text-decoration: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      transition: transform 0.1s, box-shadow 0.1s;
-    }
-    .btn-green {
-      background: var(--primary);
-      color: #FFFFFF;
-      box-shadow: 0 5px 0 var(--primary-dark);
-    }
-    .btn-green:hover {
-      background: #52BF02;
-    }
-    .btn-green:active {
-      transform: translateY(3px);
-      box-shadow: 0 2px 0 var(--primary-dark);
-    }
-    .btn-outline {
-      background: #FFFFFF;
-      color: var(--secondary-dark);
-      border: 2px solid var(--border);
-      box-shadow: 0 4px 0 var(--border);
-    }
-    .btn-outline:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 var(--border);
+      gap: 12px;
+      margin-bottom: 30px;
     }
 
-    .social-proof {
+    .hero-proof {
       display: flex;
       align-items: center;
       gap: 16px;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 600;
       color: var(--text-muted);
-      font-weight: 700;
-    }
-    @media (max-width: 860px) {
-      .social-proof {
-        justify-content: center;
-      }
+      flex-wrap: wrap;
     }
 
-    /* MASCOT HERO VISUAL */
-    .hero-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    .mascot-container {
-      position: relative;
-      display: inline-block;
-    }
-    .branko-hero-img {
-      width: 320px;
-      max-width: 85vw;
-      height: auto;
-      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    .speech-bubble {
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      background: #FFFFFF;
-      border: 2px solid #E5E7EB;
-      box-shadow: 0 6px 0 #E5E7EB, 0 10px 20px rgba(0,0,0,0.06);
-      padding: 12px 18px;
-      border-radius: 18px;
-      font-weight: 800;
-      font-size: 16px;
-      color: #1A1A1A;
+    .proof-item {
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .proof-dot {
+      color: var(--border);
+    }
+
+    /* MASCOT VISUAL */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .mascot-frame {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .branko-img {
+      width: 290px;
+      max-width: 80vw;
+      height: auto;
+      filter: drop-shadow(0 14px 28px rgba(12, 64, 118, 0.14));
+      animation: gentleFloat 3.5s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .speech-bubble {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
       white-space: nowrap;
-      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 2;
     }
-    @keyframes popIn {
-      0% { transform: scale(0.6); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+
     .speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: -10px;
-      left: 30px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid #FFFFFF;
+      bottom: -7px;
+      left: 24px;
+      width: 14px;
+      height: 14px;
+      background: #FFFFFF;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transform: rotate(45deg);
     }
 
-    /* VALUE PROPOSITION GRID */
-    .section {
-      padding: 80px 24px;
+    /* INTERACTIVE APP SHOWCASE */
+    .showcase-section {
+      padding: 60px 20px 80px;
       background: #FFFFFF;
-      border-top: 2px solid var(--border);
-      border-bottom: 2px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .section-container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-title {
+
+    .section-header {
       text-align: center;
-      margin-bottom: 50px;
+      max-width: 680px;
+      margin: 0 auto 48px;
     }
-    .section-title h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 36px;
+
+    .section-tag {
+      font-size: 13px;
       font-weight: 800;
-      color: #1A1A1A;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: inline-block;
     }
-    .section-title p {
-      font-size: 18px;
+
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.6px;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 16px;
       color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* PHONE MOCKUP */
+    .mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .phone-container {
+      width: 100%;
+      max-width: 340px;
+      background: #FFFFFF;
+      border-radius: 36px;
+      border: 8px solid #0F172A;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16);
+      padding: 20px 18px;
+      position: relative;
+    }
+
+    .phone-notch {
+      width: 100px;
+      height: 18px;
+      background: #0F172A;
+      border-radius: 0 0 12px 12px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .app-screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .app-stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .app-script-switch {
+      display: flex;
+      background: #F1F5F9;
+      border-radius: var(--radius-full);
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .app-script-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .app-script-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .app-quiz-card {
+      background: #F8FAFC;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .app-quiz-sub {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .app-quiz-phrase {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.35;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+
+    .app-quiz-trans {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .app-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .app-option {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px;
       font-weight: 600;
-      max-width: 600px;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .app-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .app-check-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .app-check-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .showcase-details {
+      flex: 1;
+      min-width: 280px;
+      max-width: 480px;
+    }
+
+    .showcase-feature-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .showcase-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .showcase-item-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .showcase-item-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* FEATURES GRID */
+    .features-section {
+      padding: 70px 20px;
+      max-width: 1140px;
       margin: 0 auto;
     }
 
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 28px;
+      gap: 24px;
     }
+
     .feature-card {
-      background: #FAFAFA;
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 24px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
       text-align: center;
-      box-shadow: 0 5px 0 var(--border);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 9px 0 var(--border);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-focus);
     }
-    .feature-icon-img {
-      width: 110px;
-      height: 110px;
+
+    .feature-img {
+      width: 95px;
+      height: 95px;
       object-fit: contain;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
+
     .feature-card h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: #1A1A1A;
-      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
     }
+
     .feature-card p {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-muted);
       line-height: 1.5;
     }
 
-    /* STATS BANNER */
-    .stats-banner {
-      background: linear-gradient(135deg, #0C4076 0%, #1A5FA8 100%);
+    /* CURRICULUM SECTION */
+    .curriculum-section {
+      padding: 70px 20px 80px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .curr-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      transition: all 0.2s ease;
+    }
+
+    .curr-card:hover {
+      border-color: var(--primary);
+      background: #FFFFFF;
+      box-shadow: var(--shadow-md);
+    }
+
+    .curr-level-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--primary);
       color: #FFFFFF;
-      padding: 60px 24px;
+      margin-bottom: 12px;
+    }
+
+    .curr-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .curr-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .curr-stats {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* NUMBERS BANNER */
+    .numbers-banner {
+      background: linear-gradient(135deg, var(--serbian-blue) 0%, #175494 100%);
+      color: #FFFFFF;
+      padding: 50px 20px;
       text-align: center;
     }
-    .stats-grid {
+
+    .numbers-grid {
       max-width: 1000px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
     }
-    .stat-item h3 {
-      font-size: 44px;
-      font-weight: 900;
+
+    .num-item h3 {
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 800;
       color: #FFD200;
-      margin-bottom: 6px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
     }
-    .stat-item p {
-      font-size: 16px;
-      font-weight: 700;
+
+    .num-item p {
+      font-size: 14px;
+      font-weight: 600;
       opacity: 0.9;
     }
 
-    /* CTA FOOTER SECTION */
+    /* CTA BOX */
     .cta-section {
+      padding: 70px 20px;
+      max-width: 860px;
+      margin: 0 auto;
       text-align: center;
-      padding: 80px 24px;
-      background: var(--bg);
     }
+
     .cta-card {
       background: #FFFFFF;
-      border: 3px solid var(--border);
-      border-radius: 28px;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 50px 30px;
-      box-shadow: 0 8px 0 var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 28px;
+      box-shadow: var(--shadow-md);
     }
+
     .cta-card h2 {
-      font-size: 34px;
+      font-size: clamp(24px, 3.5vw, 32px);
       font-weight: 800;
-      margin-bottom: 14px;
-      color: #1A1A1A;
+      margin-bottom: 12px;
+      color: var(--text);
     }
+
     .cta-card p {
-      font-size: 17px;
+      font-size: 15px;
       color: var(--text-muted);
-      margin-bottom: 30px;
-      font-weight: 600;
+      margin-bottom: 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     /* FOOTER */
     footer {
       background: #FFFFFF;
-      border-top: 2px solid var(--border);
-      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      padding: 36px 20px;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
     }
+
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
+      gap: 20px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
     }
+
     .footer-links a {
-      color: var(--text);
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 700;
-      transition: color 0.2s;
+      font-weight: 600;
+      transition: color 0.15s ease;
     }
+
     .footer-links a:hover {
       color: var(--primary);
+    }
+
+    /* MOBILE RESPONSIVE TWEAKS */
+    @media (max-width: 860px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 50px;
+        gap: 30px;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+      }
+
+      .hero-proof {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .branko-img {
+        width: 220px;
+      }
+
+      .mockup-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 10px 14px;
+      }
+
+      .brand-text {
+        font-size: 19px;
+      }
+
+      .brand-img {
+        width: 34px;
+        height: 34px;
+      }
+
+      .btn-nav {
+        display: none;
+      }
+
+      .lang-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+
+      .cta-card {
+        padding: 30px 18px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER NAVIGATION -->
   <header>
-    <div class="header-container">
+    <div class="nav-container">
       <a href="/" class="brand">
         <img src="assets/img/icon-512.png" alt="Serbio Logo" class="brand-img">
-        <span class="brand-text">Serbio</span>
+        <span class="brand-text">Serbio<span>.</span></span>
       </a>
 
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#features" id="nav-features">Funkciók</a>
-          <a href="https://meszkee.github.io/serbio-privacy-policy/" id="nav-privacy">Adatvédelem</a>
-          <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" id="nav-terms">ÁSZF</a>
-        </nav>
+      <nav class="nav-menu">
+        <a href="#showcase" class="nav-link" id="nav-showcase">Alkalmazás</a>
+        <a href="#features" class="nav-link" id="nav-features">Funkciók</a>
+        <a href="#curriculum" class="nav-link" id="nav-curriculum">Tananyag</a>
+        <a href="#overview" class="nav-link" id="nav-overview">Áttekintés</a>
+      </nav>
 
-        <!-- 3-Language Picker -->
-        <div class="lang-picker">
-          <button class="lang-opt active" id="btn-hu" onclick="setLang('hu')">🇭🇺 HU</button>
-          <button class="lang-opt" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
-          <button class="lang-opt" id="btn-ru" onclick="setLang('ru')">🇷🇺 RU</button>
+      <div class="nav-actions">
+        <!-- 3-Language Selector -->
+        <div class="lang-selector">
+          <button class="lang-btn active" id="btn-hu" onclick="setLang('hu')">HU</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
         </div>
 
-        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="btn-nav" id="btn-header-policy">Adatvédelem</a>
+        <a href="#showcase" class="btn btn-primary btn-nav" id="btn-nav-action">Kipróbálás</a>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="badge-pill" id="hero-badge">
-        <span>🇷🇸</span> 100% Offline Szerb Nyelvtanulás
-      </div>
-      <h1 id="hero-title">Tanulj szerbül <span class="highlight">könnyedén</span>, játékosan.</h1>
-      <p class="hero-desc" id="hero-desc">
-        A Serbio egy modern, Duolingo-stílusú mobilalkalmazás, amivel életszerű szerb kifejezéseket tanulhatsz meg — akár repülőgép üzemmódban, internet nélkül is!
-      </p>
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span id="hero-badge-text">100% Offline Szerb Nyelvtanulás</span>
+        </div>
+        
+        <h1 id="hero-title">Tanulj szerbül <span class="text-blue">magabiztosan</span> és kötetlenül.</h1>
+        
+        <p class="hero-desc" id="hero-desc">
+          A Serbio egy modern mobilalkalmazás a valódi beszélt szerb nyelv elsajátításához. Párhuzamos latin és cirill írásmód, természetes kiejtés és teljes offline működés internet nélkül.
+        </p>
 
-      <div class="hero-cta">
-        <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green" id="cta-btn-main">
-          🚀 Ismerd meg az appot
-        </a>
-        <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" class="duo-button btn-outline" id="cta-btn-terms">
-          📖 ÁSZF & Szabályzat
-        </a>
-      </div>
+        <div class="hero-cta">
+          <a href="#showcase" class="btn btn-primary" id="hero-btn-primary">
+            Alkalmazás Felfedezése
+          </a>
+          <a href="#curriculum" class="btn btn-secondary" id="hero-btn-secondary">
+            Tananyag Megtekintése
+          </a>
+        </div>
 
-      <div class="social-proof">
-        <span id="proof-units">⭐ 40 Teljes Tantervi Egység</span>
-        <span>•</span>
-        <span id="proof-audio">🎙️ 9 700+ Autentikus Szerb Hang</span>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="mascot-container">
-        <img src="assets/img/branko_waving.png" alt="Branko a kabalamaci" class="branko-hero-img">
-        <div class="speech-bubble" id="branko-speech">
-          Zdravo! Ja sam Branko! 🇷🇸
+        <div class="hero-proof">
+          <div class="proof-item">
+            <strong id="proof-units">40 Tanegység</strong>
+          </div>
+          <span class="proof-dot">•</span>
+          <div class="proof-item">
+            <strong id="proof-audio">9 700+ Szerb Hang</strong>
+          </div>
+          <span class="proof-dot">•</span>
+          <div class="proof-item">
+            <strong id="proof-offline">Nulla Adatforgalom</strong>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- VALUE PROPOSITION -->
-  <section id="features" class="section">
-    <div class="section-container">
-      <div class="section-title">
-        <h2 id="section-features-title">Miért fogod imádni a Serbiót?</h2>
-        <p id="section-features-sub">Gondosan felépített leckék, valódi balkáni beszélt nyelv és motiváló játékos elemek.</p>
+      <div class="hero-visual">
+        <div class="mascot-frame">
+          <img src="assets/img/branko_waving.png" alt="Branko Kabalamaci" class="branko-img">
+          <div class="speech-bubble" id="branko-speech">
+            Zdravo! Ja sam Branko!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE APP SHOWCASE / PHONE MOCKUP -->
+    <section id="showcase" class="showcase-section">
+      <div class="section-header">
+        <span class="section-tag" id="tag-showcase">Élő Bemutató</span>
+        <h2 class="section-title" id="title-showcase">Ilyen egyszerű a gyakorlás</h2>
+        <p class="section-desc" id="desc-showcase">
+          Próbáld ki az interaktív írásmód-váltót közvetlenül az alábbi mintafelületen!
+        </p>
+      </div>
+
+      <div class="mockup-wrapper">
+        <!-- Interactive Mockup Screen -->
+        <div class="phone-container">
+          <div class="phone-notch"></div>
+          
+          <div class="app-screen-header">
+            <div class="app-stat-chip">
+              <span style="color:#FF9600;">🔥</span> <span>7</span>
+            </div>
+            
+            <!-- Dynamic Latin / Cyrillic Toggle inside mockup -->
+            <div class="app-script-switch">
+              <button class="app-script-btn active" id="mockup-btn-lat" onclick="setMockupScript('lat')">Latin</button>
+              <button class="app-script-btn" id="mockup-btn-cyr" onclick="setMockupScript('cyr')">Ћирилица</button>
+            </div>
+            
+            <div class="app-stat-chip">
+              <span style="color:#0066FF;">⚡</span> <span>180 XP</span>
+            </div>
+          </div>
+
+          <div class="app-quiz-card">
+            <div class="app-quiz-sub" id="mockup-quiz-sub">Kávézó & Rendelés</div>
+            <div class="app-quiz-phrase" id="mockup-quiz-phrase">Može jedna kafa sa mlekom?</div>
+            <div class="app-quiz-trans" id="mockup-quiz-trans">Kaphatok egy tejeskávét?</div>
+          </div>
+
+          <div class="app-options-list">
+            <div class="app-option selected" id="opt-1">
+              <span id="opt-1-text">Može jedna kafa sa mlekom?</span>
+              <span style="color:var(--primary); font-weight:700;">✓</span>
+            </div>
+            <div class="app-option" id="opt-2">
+              <span id="opt-2-text">Dva čaja, molim vas.</span>
+            </div>
+            <div class="app-option" id="opt-3">
+              <span id="opt-3-text">Gde je pekara?</span>
+            </div>
+          </div>
+
+          <button class="app-check-btn" id="mockup-check-btn">Kiejtés & Ellenőrzés</button>
+        </div>
+
+        <!-- Explanatory Highlights -->
+        <div class="showcase-details">
+          <div class="showcase-feature-item">
+            <div class="showcase-icon-box">Aa</div>
+            <div>
+              <h4 class="showcase-item-title" id="showcase-f1-title">Két Egyenrangú Írásmód</h4>
+              <p class="showcase-item-desc" id="showcase-f1-desc">
+                A szerb nyelvben a latin és a cirill ábécé egyenrangú. A Serbióban egyetlen érintéssel válthatsz közöttük bármelyik leckében vagy szókártyán.
+              </p>
+            </div>
+          </div>
+
+          <div class="showcase-feature-item">
+            <div class="showcase-icon-box">0s</div>
+            <div>
+              <h4 class="showcase-item-title" id="showcase-f2-title">Azonnali Offline Válaszidő</h4>
+              <p class="showcase-item-desc" id="showcase-f2-desc">
+                Nincs töltőképernyő és nincsenek hálózati hibák. Minden hanganyag és feladat előre generálva a telefonodon él.
+              </p>
+            </div>
+          </div>
+
+          <div class="showcase-feature-item">
+            <div class="showcase-icon-box">💬</div>
+            <div>
+              <h4 class="showcase-item-title" id="showcase-f3-title">Valódi Beszélt Nyelv</h4>
+              <p class="showcase-item-desc" id="showcase-f3-desc">
+                A mesterkélt tükörfordítások helyett az autentikus balkáni kifejezéseket tanítjuk, hogy bátran megszólalhass Belgrádban vagy Újvidéken.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE FEATURES -->
+    <section id="features" class="features-section">
+      <div class="section-header">
+        <span class="section-tag" id="tag-features">Miért a Serbio?</span>
+        <h2 class="section-title" id="title-features">Korszerű Funkciók a Hatékony Tanuláshoz</h2>
+        <p class="section-desc" id="desc-features">
+          Minden részlet a gyors, zavartalan és magabiztos nyelvtanulást szolgálja.
+        </p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card">
-          <img src="assets/img/branko_explorer.png" alt="Offline Felfedező Branko" class="feature-icon-img">
-          <h3 id="card1-title">✈️ 100% Offline Működés</h3>
-          <p id="card1-desc">Minden lecke, kvíz, szótár és hangfájl a telefonodon él. Utazás közben, repülőn vagy határátkeléskor is tanulhatsz net nélkül.</p>
+          <img src="assets/img/branko_explorer.png" alt="Offline Tanulás" class="feature-img">
+          <h3 id="card1-title">100% Offline Működés</h3>
+          <p id="card1-desc">Minden lecke, kvíz, szótár és hangfájl a telefonodon fut. Repülőn, határon vagy utazás közben is szabadon tanulhatsz.</p>
         </div>
 
         <div class="feature-card">
-          <img src="assets/img/branko_coffee.png" alt="Kávézó Branko" class="feature-icon-img">
-          <h3 id="card2-title">☕ Élő, Autentikus Szerb</h3>
-          <p id="card2-desc">Tükörfordítások helyett a valódi belgrádi beszélt nyelvet tanítjuk. Rendelj magabiztosan a pékségben (pekara) vagy a kávézóban!</p>
+          <img src="assets/img/branko_coffee.png" alt="Élő Szerb Nyelv" class="feature-img">
+          <h3 id="card2-title">Élő, Autentikus Szerb</h3>
+          <p id="card2-desc">A valódi beszélt nyelvet sajátíthatod el: rendelés pékségben (pekara), kávézóban és életszerű szituációkban.</p>
         </div>
 
         <div class="feature-card">
-          <img src="assets/img/branko_champion.png" alt="Bajnok Branko" class="feature-icon-img">
-          <h3 id="card3-title">🔤 Két Egyenrangú Írásmód</h3>
-          <p id="card3-desc">A szerb nyelv kincse a két írásmód: a cirill és a latin. Egyetlen gombnyomással válthatsz az ábécék között minden leckében.</p>
+          <img src="assets/img/branko_champion.png" alt="Írásmód Váltó" class="feature-img">
+          <h3 id="card3-title">Két Egyenrangú Írásmód</h3>
+          <p id="card3-desc">Cirill és latin ábécé egy helyen. Fonetikus átírás és azonnali kétirányú váltás minden mondatnál.</p>
         </div>
 
         <div class="feature-card">
-          <img src="assets/img/branko_head.png" alt="Branko Kabalamaci" class="feature-icon-img">
-          <h3 id="card4-title">🐻 Branko, a Tanulótársad</h3>
-          <p id="card4-desc">Napi célok, lángoló streak-számláló, XP ranglista a barátokkal és barátságos motiváció minden elvégzett egység után.</p>
+          <img src="assets/img/branko_head.png" alt="Branko Kabala" class="feature-img">
+          <h3 id="card4-title">Branko, a Tanulótársad</h3>
+          <p id="card4-desc">Játékos motiváció, lángoló napi szériaszámláló, XP pontok és baráti ranglista a folyamatos haladásért.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- STATS -->
-  <section class="stats-banner">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <h3>40</h3>
-        <p id="stat-units">Kidolgozott Tanegység (A1–B2)</p>
+    <!-- CURRICULUM SECTION -->
+    <section id="curriculum" class="curriculum-section">
+      <div class="section-header">
+        <span class="section-tag" id="tag-curriculum">Tanterv</span>
+        <h2 class="section-title" id="title-curriculum">Strukturált Tanterv a Kezdőtől a Folyékony Beszédig</h2>
+        <p class="section-desc" id="desc-curriculum">
+          A nemzetközi CEFR szabványra épülő, 40 egységből álló fokozatos tanösvény.
+        </p>
       </div>
-      <div class="stat-item">
-        <h3>260</h3>
-        <p id="stat-nodes">Interaktív Lépőkő Állomás</p>
-      </div>
-      <div class="stat-item">
-        <h3>1 976</h3>
-        <p id="stat-sentences">Autentikus Élő Példamondat</p>
-      </div>
-      <div class="stat-item">
-        <h3>9 711</h3>
-        <p id="stat-audio">Stúdióminőségű Hanganyag</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-card">
-      <h2 id="cta-box-title">Készen állsz a szerb nyelv felfedezésére?</h2>
-      <p id="cta-box-desc">Csatlakozz te is, és sajátítsd el a szerb nyelvet napi 5 perc gyakorlással, a saját tempódban!</p>
-      <a href="https://meszkee.github.io/serbio-privacy-policy/" class="duo-button btn-green" id="cta-box-btn">
-        🐻 Adatvédelem & Részletek
-      </a>
-    </div>
-  </section>
+      <div class="curriculum-grid">
+        <div class="curr-card">
+          <span class="curr-level-badge">A1</span>
+          <h4 id="lvl-a1-title">Kezdő — Alapok & Túlélés</h4>
+          <p id="lvl-a1-desc">Köszönések, bemutatkozás, kávézás, pékség, számok, a létige ragozása és tárgyeset alapjai.</p>
+          <div class="curr-stats" id="lvl-a1-stats">10 Egység • 70 Állomás • 280 Lecke</div>
+        </div>
+
+        <div class="curr-card">
+          <span class="curr-level-badge">A2</span>
+          <h4 id="lvl-a2-title">Bővített Alapfok — Hétköznapok</h4>
+          <p id="lvl-a2-desc">Utazás, család, bevásárlás, időjárás, múlt idő (Perfekat) és jövő idő (Futur I) biztos használata.</p>
+          <div class="curr-stats" id="lvl-a2-stats">10 Egység • 70 Állomás • 280 Lecke</div>
+        </div>
+
+        <div class="curr-card">
+          <span class="curr-level-badge">B1</span>
+          <h4 id="lvl-b1-title">Középfok — Önálló Beszéd</h4>
+          <p id="lvl-b1-desc">Véleménykifejezés, munka, balkáni kultúra, orvosnál és hivatalban, feltételes mód.</p>
+          <div class="curr-stats" id="lvl-b1-stats">10 Egység • 60 Állomás • 300 Lecke</div>
+        </div>
+
+        <div class="curr-card">
+          <span class="curr-level-badge">B2</span>
+          <h4 id="lvl-b2-title">Haladó Középfok — Magabiztos Nyelvhasználat</h4>
+          <p id="lvl-b2-desc">Viták, sajtóhírek, árnyalt kifejezések, szleng, idiomatikus szerb mondatszerkezetek.</p>
+          <div class="curr-stats" id="lvl-b2-stats">10 Egység • 60 Állomás • 280 Lecke</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUMBERS OVERVIEW -->
+    <section id="overview" class="numbers-banner">
+      <div class="numbers-grid">
+        <div class="num-item">
+          <h3>40</h3>
+          <p id="stat-units">Kidolgozott Tanegység</p>
+        </div>
+        <div class="num-item">
+          <h3>260</h3>
+          <p id="stat-nodes">Interaktív Állomás</p>
+        </div>
+        <div class="num-item">
+          <h3>1 976</h3>
+          <p id="stat-sentences">Autentikus Példamondat</p>
+        </div>
+        <div class="num-item">
+          <h3>9 711</h3>
+          <p id="stat-audio">Stúdióminőségű Hanganyag</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <h2 id="cta-title">Készen állsz a szerb nyelv felfedezésére?</h2>
+        <p id="cta-desc">Csatlakozz te is, és tanulj napi 5 perc gyakorlással, reklámok és internetkényszer nélkül!</p>
+        <div class="cta-buttons">
+          <a href="#showcase" class="btn btn-primary" id="cta-btn-start">
+            Kezdés Most
+          </a>
+          <a href="https://github.com/meszkee/tanulj-szerbul" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="cta-btn-git">
+            GitHub Projekt
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-links">
-      <a href="https://meszkee.github.io/serbio-privacy-policy/" id="footer-privacy">Adatvédelmi Irányelvek (Privacy Policy)</a>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/" id="footer-privacy">Adatvédelmi Tájékoztató</a>
       <span>•</span>
-      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" id="footer-terms">Felhasználási Feltételek (Terms of Service)</a>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms" id="footer-terms">Felhasználási Feltételek</a>
       <span>•</span>
-      <a href="https://github.com/meszkee/tanulj-szerbul">GitHub Projekt</a>
+      <a href="https://github.com/meszkee/tanulj-szerbul" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
-    <p id="footer-copyright">© 2026 Serbio App. Minden jog fenntartva. Készült Duolingo-stílusú játékos nyelvtanuláshoz.</p>
+    <p id="footer-copyright">© 2026 Serbio App. Minden jog fenntartva. Serbio — Tanulj Szerbül Mobilalkalmazás.</p>
   </footer>
 
+  <!-- DYNAMIC TRANSLATION & INTERACTIVITY SCRIPT -->
   <script>
-    const translations = {
-      hu: {
-        metaTitle: "Serbio — Tanulj Szerbül Mobilalkalmazás",
-        metaDesc: "A Serbio egy modern, játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!",
-        navFeatures: "Funkciók",
-        navPrivacy: "Adatvédelem",
-        navTerms: "ÁSZF",
-        btnHeaderPolicy: "Adatvédelem",
-        heroBadge: "<span>🇷🇸</span> 100% Offline Szerb Nyelvtanulás",
-        heroTitle: 'Tanulj szerbül <span class="highlight">könnyedén</span>, játékosan.',
-        heroDesc: "A Serbio egy modern, Duolingo-stílusú mobilalkalmazás, amivel életszerű szerb kifejezéseket tanulhatsz meg — akár repülőgép üzemmódban, internet nélkül is!",
-        ctaBtnMain: "🚀 Ismerd meg az appot",
-        ctaBtnTerms: "📖 ÁSZF & Szabályzat",
-        proofUnits: "⭐ 40 Teljes Tantervi Egység",
-        proofAudio: "🎙️ 9 700+ Autentikus Szerb Hang",
-        brankoSpeech: "Zdravo! Ja sam Branko! 🇷🇸",
-        sectionFeaturesTitle: "Miért fogod imádni a Serbiót?",
-        sectionFeaturesSub: "Gondosan felépített leckék, valódi balkáni beszélt nyelv és motiváló játékos elemek.",
-        card1Title: "✈️ 100% Offline Működés",
-        card1Desc: "Minden lecke, kvíz, szótár és hangfájl a telefonodon él. Utazás közben, repülőn vagy határátkeléskor is tanulhatsz net nélkül.",
-        card2Title: "☕ Élő, Autentikus Szerb",
-        card2Desc: "Tükörfordítások helyett a valódi belgrádi beszélt nyelvet tanítjuk. Rendelj magabiztosan a pékségben (pekara) vagy a kávézóban!",
-        card3Title: "🔤 Két Egyenrangú Írásmód",
-        card3Desc: "A szerb nyelv kincse a két írásmód: a cirill és a latin. Egyetlen gombnyomással válthatsz az ábécék között minden leckében.",
-        card4Title: "🐻 Branko, a Tanulótársad",
-        card4Desc: "Napi célok, lángoló streak-számláló, XP ranglista a barátokkal és barátságos motiváció minden elvégzett egység után.",
-        statUnits: "Kidolgozott Tanegység (A1–B2)",
-        statNodes: "Interaktív Lépőkő Állomás",
-        statSentences: "Autentikus Élő Példamondat",
-        statAudio: "Stúdióminőségű Hanganyag",
-        ctaBoxTitle: "Készen állsz a szerb nyelv felfedezésére?",
-        ctaBoxDesc: "Csatlakozz te is, és sajátítsd el a szerb nyelvet napi 5 perc gyakorlással, a saját tempódban!",
-        ctaBoxBtn: "🐻 Adatvédelem & Részletek",
-        footerPrivacy: "Adatvédelmi Irányelvek (Privacy Policy)",
-        footerTerms: "Felhasználási Feltételek (Terms of Service)",
-        footerCopyright: "© 2026 Serbio App. Minden jog fenntartva. Készült Duolingo-stílusú játékos nyelvtanuláshoz."
+    let currentLang = 'hu';
+    let currentMockupScript = 'lat';
+
+    const mockupPhrases = {
+      lat: {
+        phrase: "Može jedna kafa sa mlekom?",
+        opt1: "Može jedna kafa sa mlekom?",
+        opt2: "Dva čaja, molim vas.",
+        opt3: "Gde je pekara?"
       },
-      en: {
-        metaTitle: "Serbio — Learn Serbian Mobile App",
-        metaDesc: "Serbio is a modern, gamified, offline Duolingo-style Serbian language learning app featuring Branko the bear. Learn Serbian without internet, in both Cyrillic and Latin scripts!",
-        navFeatures: "Features",
-        navPrivacy: "Privacy Policy",
-        navTerms: "Terms",
-        btnHeaderPolicy: "Privacy Policy",
-        heroBadge: "<span>🇷🇸</span> 100% Offline Serbian Learning",
-        heroTitle: 'Learn Serbian <span class="highlight">effortlessly</span> & playfully.',
-        heroDesc: "Serbio is a modern, Duolingo-style mobile application designed to teach authentic everyday Serbian — fully functional offline in airplane mode!",
-        ctaBtnMain: "🚀 Explore the App",
-        ctaBtnTerms: "📖 Terms of Service",
-        proofUnits: "⭐ 40 Complete Curriculum Units",
-        proofAudio: "🎙️ 9,700+ Authentic Serbian Audio",
-        brankoSpeech: "Zdravo! I'm Branko! 🇷🇸",
-        sectionFeaturesTitle: "Why You Will Love Serbio",
-        sectionFeaturesSub: "Carefully designed lessons, authentic conversational Balkan Serbian, and motivating gamified features.",
-        card1Title: "✈️ 100% Offline-First",
-        card1Desc: "Every lesson, quiz, dictionary entry, and audio file lives directly on your phone. Learn without internet while traveling, on planes, or abroad.",
-        card2Title: "☕ Authentic Everyday Serbian",
-        card2Desc: "Instead of literal textbook translations, we teach real conversational Serbian. Order with confidence in the bakery (pekara) or cafe!",
-        card3Title: "🔤 Two Equal Alphabets",
-        card3Desc: "Serbian uniquely embraces both Cyrillic and Latin. Switch between scripts with a single tap anywhere in the app.",
-        card4Title: "🐻 Branko, Your Study Buddy",
-        card4Desc: "Daily goals, flame streak tracking, friend leaderboards, and friendly celebrations as you progress through each unit.",
-        statUnits: "Curriculum Units (A1–B2)",
-        statNodes: "Interactive Stepping Stones",
-        statSentences: "Authentic Example Sentences",
-        statAudio: "Studio-Quality Voice Audio",
-        ctaBoxTitle: "Ready to Discover the Serbian Language?",
-        ctaBoxDesc: "Join in and master Serbian with just 5 minutes of practice a day at your own pace!",
-        ctaBoxBtn: "🐻 Privacy Policy & Details",
-        footerPrivacy: "Privacy Policy",
-        footerTerms: "Terms of Service",
-        footerCopyright: "© 2026 Serbio App. All rights reserved. Built for gamified language learning."
-      },
-      ru: {
-        metaTitle: "Serbio — Изучайте Сербский Язык",
-        metaDesc: "Serbio — это современное, игровое, офлайн-приложение в стиле Duolingo для изучения сербского языка с медвежонком Бранко. Учите сербский без интернета, на кириллице и латинице!",
-        navFeatures: "Функции",
-        navPrivacy: "Конфиденциальность",
-        navTerms: "Условия",
-        btnHeaderPolicy: "Политика конфиденциальности",
-        heroBadge: "<span>🇷🇸</span> 100% Офлайн изучение сербского",
-        heroTitle: 'Учите сербский <span class="highlight">легко</span> и увлекательно.',
-        heroDesc: "Serbio — это современное мобильное приложение в стиле Duolingo для изучения живой сербской речи — работает на 100% офлайн даже в режиме полета!",
-        ctaBtnMain: "🚀 Узнать больше",
-        ctaBtnTerms: "📖 Условия использования",
-        proofUnits: "⭐ 40 полных учебных разделов",
-        proofAudio: "🎙️ 9 700+ аутентичных сербских аудио",
-        brankoSpeech: "Zdravo! Я Бранко! 🇷🇸",
-        sectionFeaturesTitle: "Почему вам понравится Serbio?",
-        sectionFeaturesSub: "Тщательно продуманные уроки, живой разговорный сербский язык и мотивирующие элементы геймификации.",
-        card1Title: "✈️ 100% Офлайн-режим",
-        card1Desc: "Все уроки, тесты, словарь и аудиозаписи хранятся на вашем телефоне. Учитесь в путешествиях, самолете или без роуминга.",
-        card2Title: "☕ Живой разговорный сербский",
-        card2Desc: "Никаких механических переводов — только живая речь Белграда. Уверенно заказывайте в пекарне (пекара) или в кафе!",
-        card3Title: "🔤 Две равноправные азбуки",
-        card3Desc: "Уникальность сербского языка — в кириллице и латинице. Переключайтесь между ними в один клик в любом уроке.",
-        card4Title: "🐻 Медвежонок Бранко",
-        card4Desc: "Ежедневные цели, огненная серия дней, рейтинг с друзьями и поддержка талисмана на каждом шагу.",
-        statUnits: "Учебных разделов (A1–B2)",
-        statNodes: "Интерактивных станций",
-        statSentences: "Живых примеров предложений",
-        statAudio: "Студийных аудиозаписей",
-        ctaBoxTitle: "Готовы открыть для себя сербский язык?",
-        ctaBoxDesc: "Присоединяйтесь и осваивайте сербский язык всего за 5 минут в день в комфортном темпе!",
-        ctaBoxBtn: "🐻 Конфиденциальность и детали",
-        footerPrivacy: "Политика конфиденциальности",
-        footerTerms: "Условия использования",
-        footerCopyright: "© 2026 Serbio App. Все права защищены. Создано для игрового изучения языков."
+      cyr: {
+        phrase: "Може једна кафа са млеком?",
+        opt1: "Може једна кафа са млеком?",
+        opt2: "Два чаја, молим вас.",
+        opt3: "Где је пекара?"
       }
     };
 
-    function setLang(lang) {
-      const t = translations[lang] || translations.hu;
+    const translations = {
+      hu: {
+        metaTitle: "Serbio — Tanulj Szerbül Mobilalkalmazás",
+        metaDesc: "A Serbio egy modern, offline szerb nyelvtanuló mobilapp Brankóval, a szerb macival. Tanulj szerbül internet nélkül, cirill és latin írásmódban!",
+        navShowcase: "Alkalmazás",
+        navFeatures: "Funkciók",
+        navCurriculum: "Tananyag",
+        navOverview: "Áttekintés",
+        btnNavAction: "Kipróbálás",
+        heroBadgeText: "100% Offline Szerb Nyelvtanulás",
+        heroTitle: 'Tanulj szerbül <span class="text-blue">magabiztosan</span> és kötetlenül.',
+        heroDesc: "A Serbio egy modern mobilalkalmazás a valódi beszélt szerb nyelv elsajátításához. Párhuzamos latin és cirill írásmód, természetes kiejtés és teljes offline működés internet nélkül.",
+        heroBtnPrimary: "Alkalmazás Felfedezése",
+        heroBtnSecondary: "Tananyag Megtekintése",
+        proofUnits: "40 Tanegység",
+        proofAudio: "9 700+ Szerb Hang",
+        proofOffline: "Nulla Adatforgalom",
+        brankoSpeech: "Zdravo! Ja sam Branko!",
+        tagShowcase: "Élő Bemutató",
+        titleShowcase: "Ilyen egyszerű a gyakorlás",
+        descShowcase: "Próbáld ki az interaktív írásmód-váltót közvetlenül az alábbi mintafelületen!",
+        mockupQuizSub: "Kávézó & Rendelés",
+        mockupQuizTrans: "Kaphatok egy tejeskávét?",
+        mockupCheckBtn: "Kiejtés & Ellenőrzés",
+        showcaseF1Title: "Két Egyenrangú Írásmód",
+        showcaseF1Desc: "A szerb nyelvben a latin és a cirill ábécé egyenrangú. A Serbióban egyetlen érintéssel válthatsz közöttük bármelyik leckében vagy szókártyán.",
+        showcaseF2Title: "Azonnali Offline Válaszidő",
+        showcaseF2Desc: "Nincs töltőképernyő és nincsenek hálózati hibák. Minden hanganyag és feladat előre generálva a telefonodon él.",
+        showcaseF3Title: "Valódi Beszélt Nyelv",
+        showcaseF3Desc: "A mesterkélt tükörfordítások helyett az autentikus balkáni kifejezéseket tanítjuk, hogy bátran megszólalhass Belgrádban vagy Újvidéken.",
+        tagFeatures: "Miért a Serbio?",
+        titleFeatures: "Korszerű Funkciók a Hatékony Tanuláshoz",
+        descFeatures: "Minden részlet a gyors, zavartalan és magabiztos nyelvtanulást szolgálja.",
+        card1Title: "100% Offline Működés",
+        card1Desc: "Minden lecke, kvíz, szótár és hangfájl a telefonodon fut. Repülőn, határon vagy utazás közben is szabadon tanulhatsz.",
+        card2Title: "Élő, Autentikus Szerb",
+        card2Desc: "A valódi beszélt nyelvet sajátíthatod el: rendelés pékségben (pekara), kávézóban és életszerű szituációkban.",
+        card3Title: "Két Egyenrangú Írásmód",
+        card3Desc: "Cirill és latin ábécé egy helyen. Fonetikus átírás és azonnali kétirányú váltás minden mondatnál.",
+        card4Title: "Branko, a Tanulótársad",
+        card4Desc: "Játékos motiváció, lángoló napi szériaszámláló, XP pontok és baráti ranglista a folyamatos haladásért.",
+        tagCurriculum: "Tanterv",
+        titleCurriculum: "Strukturált Tanterv a Kezdőtől a Folyékony Beszédig",
+        descCurriculum: "A nemzetközi CEFR szabványra épülő, 40 egységből álló fokozatos tanösvény.",
+        lvlA1Title: "Kezdő — Alapok & Túlélés",
+        lvlA1Desc: "Köszönések, bemutatkozás, kávézás, pékség, számok, a létige ragozása és tárgyeset alapjai.",
+        lvlA1Stats: "10 Egység • 70 Állomás • 280 Lecke",
+        lvlA2Title: "Bővített Alapfok — Hétköznapok",
+        lvlA2Desc: "Utazás, család, bevásárlás, időjárás, múlt idő (Perfekat) és jövő idő (Futur I) biztos használata.",
+        lvlA2Stats: "10 Egység • 70 Állomás • 280 Lecke",
+        lvlB1Title: "Középfok — Önálló Beszéd",
+        lvlB1Desc: "Véleménykifejezés, munka, balkáni kultúra, orvosnál és hivatalban, feltételes mód.",
+        lvlB1Stats: "10 Egység • 60 Állomás • 300 Lecke",
+        lvlB2Title: "Haladó Középfok — Magabiztos Nyelvhasználat",
+        lvlB2Desc: "Viták, sajtóhírek, árnyalt kifejezések, szleng, idiomatikus szerb mondatszerkezetek.",
+        lvlB2Stats: "10 Egység • 60 Állomás • 280 Lecke",
+        statUnits: "Kidolgozott Tanegység",
+        statNodes: "Interaktív Állomás",
+        statSentences: "Autentikus Példamondat",
+        statAudio: "Stúdióminőségű Hanganyag",
+        ctaTitle: "Készen állsz a szerb nyelv felfedezésére?",
+        ctaDesc: "Csatlakozz te is, és tanulj napi 5 perc gyakorlással, reklámok és internetkényszer nélkül!",
+        ctaBtnStart: "Kezdés Most",
+        ctaBtnGit: "GitHub Projekt",
+        footerPrivacy: "Adatvédelmi Tájékoztató",
+        footerTerms: "Felhasználási Feltételek",
+        footerCopyright: "© 2026 Serbio App. Minden jog fenntartva. Serbio — Tanulj Szerbül Mobilalkalmazás."
+      },
+      en: {
+        metaTitle: "Serbio — Learn Serbian Mobile App",
+        metaDesc: "Serbio is a modern, offline Serbian language learning app featuring Branko the bear. Learn Serbian without internet, in both Cyrillic and Latin scripts!",
+        navShowcase: "App",
+        navFeatures: "Features",
+        navCurriculum: "Curriculum",
+        navOverview: "Overview",
+        btnNavAction: "Try Demo",
+        heroBadgeText: "100% Offline Serbian Learning",
+        heroTitle: 'Learn Serbian <span class="text-blue">confidently</span> and effectively.',
+        heroDesc: "Serbio is a modern mobile app designed for mastering authentic spoken Serbian. Seamless dual-script support (Latin and Cyrillic), authentic pronunciation, and completely offline functionality.",
+        heroBtnPrimary: "Explore the App",
+        heroBtnSecondary: "View Curriculum",
+        proofUnits: "40 Units",
+        proofAudio: "9,700+ Serbian Audio",
+        proofOffline: "Zero Data Usage",
+        brankoSpeech: "Zdravo! I'm Branko!",
+        tagShowcase: "Interactive Demo",
+        titleShowcase: "Learning is this intuitive",
+        descShowcase: "Experience the real-time script switcher directly on the interactive preview below!",
+        mockupQuizSub: "Café & Ordering",
+        mockupQuizTrans: "Can I have a coffee with milk?",
+        mockupCheckBtn: "Pronunciation & Check",
+        showcaseF1Title: "Two Equal Alphabets",
+        showcaseF1Desc: "In Serbian, Latin and Cyrillic are equally official. Switch between scripts instantly with a single tap in any exercise.",
+        showcaseF2Title: "Instant Offline Response",
+        showcaseF2Desc: "Zero loading screens and no connection errors. All audio clips and exercises live locally on your device.",
+        showcaseF3Title: "Authentic Spoken Serbian",
+        showcaseF3Desc: "Instead of artificial textbook translations, learn real Balkan conversational phrases used every day in Belgrade and Novi Sad.",
+        tagFeatures: "Why Serbio?",
+        titleFeatures: "Modern Features for Effective Learning",
+        descFeatures: "Crafted specifically for rapid, enjoyable, and reliable language acquisition.",
+        card1Title: "100% Offline Operation",
+        card1Desc: "Every lesson, quiz, dictionary entry, and audio file runs locally on your phone. Practice on flights, border crossings, or remote areas.",
+        card2Title: "Authentic Living Serbian",
+        card2Desc: "Master real everyday speech: ordering at a bakery (pekara), café discussions, and real-life situational dialogues.",
+        card3Title: "Two Equal Alphabets",
+        card3Desc: "Cyrillic and Latin side-by-side. Instant bi-directional phonetic transliteration across all sentences.",
+        card4Title: "Branko, Your Study Buddy",
+        card4Desc: "Gamified motivation, flame streak tracking, XP points, and friendly leaderboards to keep you progressing every day.",
+        tagCurriculum: "Curriculum",
+        titleCurriculum: "Structured Curriculum from Beginner to Fluency",
+        descCurriculum: "A comprehensive 40-unit learning journey built upon international CEFR standards.",
+        lvlA1Title: "A1 Beginner — Foundations & Survival",
+        lvlA1Desc: "Greetings, introductions, ordering coffee & bakery, numbers, verb 'biti' and accusative basics.",
+        lvlA1Stats: "10 Units • 70 Stations • 280 Lessons",
+        lvlA2Title: "A2 Elementary — Everyday Life",
+        lvlA2Desc: "Travel, family, shopping, weather, confident past tense (Perfekat) and future tense (Futur I).",
+        lvlA2Stats: "10 Units • 70 Stations • 280 Lessons",
+        lvlB1Title: "B1 Intermediate — Independent Communication",
+        lvlB1Desc: "Expressing opinions, work, Balkan cultural nuances, medical & administrative contexts, conditionals.",
+        lvlB1Stats: "10 Units • 60 Stations • 300 Lessons",
+        lvlB2Title: "B2 Upper-Intermediate — Confident Fluency",
+        lvlB2Desc: "Debates, news articles, nuanced expressions, authentic slang, and complex Serbian idioms.",
+        lvlB2Stats: "10 Units • 60 Stations • 280 Lessons",
+        statUnits: "Curriculum Units",
+        statNodes: "Interactive Stations",
+        statSentences: "Authentic Example Sentences",
+        statAudio: "Studio Audio Files",
+        ctaTitle: "Ready to explore the Serbian language?",
+        ctaDesc: "Join today and make progress in just 5 minutes a day, completely free of ads and internet requirements!",
+        ctaBtnStart: "Get Started",
+        ctaBtnGit: "GitHub Project",
+        footerPrivacy: "Privacy Policy",
+        footerTerms: "Terms of Service",
+        footerCopyright: "© 2026 Serbio App. All rights reserved. Serbio — Serbian Language Learning App."
+      },
+      ru: {
+        metaTitle: "Serbio — Мобильное приложение для изучения сербского языка",
+        metaDesc: "Serbio — это современное офлайн-приложение для изучения сербского языка с медвежонком Бранко. Учите сербский без интернета, на кириллице и латинице!",
+        navShowcase: "Приложение",
+        navFeatures: "Возможности",
+        navCurriculum: "Программа",
+        navOverview: "Обзор",
+        btnNavAction: "Демо",
+        heroBadgeText: "100% Офлайн обучение сербскому",
+        heroTitle: 'Учите сербский язык <span class="text-blue">уверенно</span> и легко.',
+        heroDesc: "Serbio — современное мобильное приложение для освоения живого разговорного сербского языка. Параллельная латиница и кириллица, естественное произношение и полная работа без интернета.",
+        heroBtnPrimary: "Обзор приложения",
+        heroBtnSecondary: "Учебная программа",
+        proofUnits: "40 Модулей",
+        proofAudio: "9 700+ Аудиозаписей",
+        proofOffline: "Без расхода трафика",
+        brankoSpeech: "Zdravo! Я Бранко!",
+        tagShowcase: "Интерактивное демо",
+        titleShowcase: "Учиться действительно просто",
+        descShowcase: "Попробуйте переключение между латиницей и кириллицей прямо на интерактивном макете ниже!",
+        mockupQuizSub: "Кафе и заказ",
+        mockupQuizTrans: "Можно один кофе с молоком?",
+        mockupCheckBtn: "Произношение и проверка",
+        showcaseF1Title: "Два равноправных алфавита",
+        showcaseF1Desc: "В сербском языке латиница и кириллица равноправны. В Serbio вы можете мгновенно переключаться между ними в один клик.",
+        showcaseF2Title: "Мгновенный офлайн отклик",
+        showcaseF2Desc: "Никаких экранов загрузки и сетевых ошибок. Все аудиозаписи и упражнения хранятся прямо на вашем телефоне.",
+        showcaseF3Title: "Живой разговорный язык",
+        showcaseF3Desc: "Вместо искусственных книжных фраз мы обучаем живому языку, на котором говорят в Белграде и Нови-Саде.",
+        tagFeatures: "Преимущества",
+        titleFeatures: "Современные функции для эффективного обучения",
+        descFeatures: "Каждая деталь создана для быстрого, увлекательного и надежного освоения языка.",
+        card1Title: "100% Офлайн работа",
+        card1Desc: "Все уроки, тесты, словарь и аудио работают на телефоне. Учитесь в самолете, на границе или в путешествиях.",
+        card2Title: "Живой сербский язык",
+        card2Desc: "Осваивайте повседневную речь: заказ в пекарне (пекара), общение в кафе и жизненные ситуации.",
+        card3Title: "Два равноправных алфавита",
+        card3Desc: "Кириллица и латиница рядом. Мгновенная транслитерация каждого предложения.",
+        card4Title: "Медвежонок Бранко",
+        card4Desc: "Игровая мотивация, счетчик серий уроков, баллы XP и рейтинг с друзьями для стабильного прогресса.",
+        tagCurriculum: "Программа",
+        titleCurriculum: "Структурированная программа от нуля до свободного владения",
+        descCurriculum: "Пошаговый курс из 40 модулей, разработанный по международным стандартам CEFR.",
+        lvlA1Title: "A1 Начальный — Основы и выживание",
+        lvlA1Desc: "Приветствия, знакомство, кофе, пекарня, числа, спряжение глагола 'biti' и основы винительного падежа.",
+        lvlA1Stats: "10 Модулей • 70 Станций • 280 Уроков",
+        lvlA2Title: "A2 Элементарный — Повседневная жизнь",
+        lvlA2Desc: "Путешествия, семья, покупки, погода, уверенное прошедшее (Perfekat) и будущее (Futur I) время.",
+        lvlA2Stats: "10 Модулей • 70 Станций • 280 Уроков",
+        lvlB1Title: "B1 Средний — Самостоятельная речь",
+        lvlB1Desc: "Выражение мнения, работа, балканская культура, визит к врачу, сослагательное наклонение.",
+        lvlB1Stats: "10 Модулей • 60 Станций • 300 Уроков",
+        lvlB2Title: "B2 Продвинутый — Свободное владение",
+        lvlB2Desc: "Дискуссии, пресса, тонкие оттенки значений, сленг и сложные сербские идиомы.",
+        lvlB2Stats: "10 Модулей • 60 Станций • 280 Уроков",
+        statUnits: "Учебных модулей",
+        statNodes: "Интерактивных станций",
+        statSentences: "Примеров живой речи",
+        statAudio: "Студийных аудиозаписей",
+        ctaTitle: "Готовы открыть для себя сербский язык?",
+        ctaDesc: "Присоединяйтесь и учитесь по 5 минут в день — без рекламы и без зависимости от интернета!",
+        ctaBtnStart: "Начать сейчас",
+        ctaBtnGit: "Проект на GitHub",
+        footerPrivacy: "Политика конфиденциальности",
+        footerTerms: "Условия использования",
+        footerCopyright: "© 2026 Serbio App. Все права защищены. Serbio — Изучение сербского языка."
+      }
+    };
 
-      // Update button active states
+    function setMockupScript(script) {
+      currentMockupScript = script;
+      document.getElementById('mockup-btn-lat').classList.toggle('active', script === 'lat');
+      document.getElementById('mockup-btn-cyr').classList.toggle('active', script === 'cyr');
+      
+      const p = mockupPhrases[script];
+      const phraseEl = document.getElementById('mockup-quiz-phrase');
+      phraseEl.style.opacity = '0';
+      setTimeout(() => {
+        phraseEl.textContent = p.phrase;
+        document.getElementById('opt-1-text').textContent = p.opt1;
+        document.getElementById('opt-2-text').textContent = p.opt2;
+        document.getElementById('opt-3-text').textContent = p.opt3;
+        phraseEl.style.opacity = '1';
+      }, 150);
+    }
+
+    function setLang(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('serbio_site_lang', lang);
+
       document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
 
-      // Update document text
-      document.getElementById('meta-title').textContent = t.metaTitle;
-      document.getElementById('nav-features').textContent = t.navFeatures;
-      document.getElementById('nav-privacy').textContent = t.navPrivacy;
-      document.getElementById('nav-terms').textContent = t.navTerms;
-      document.getElementById('btn-header-policy').textContent = t.btnHeaderPolicy;
+      const t = translations[lang];
 
-      document.getElementById('hero-badge').innerHTML = t.heroBadge;
+      document.getElementById('meta-title').textContent = t.metaTitle;
+      document.getElementById('meta-desc').setAttribute('content', t.metaDesc);
+
+      document.getElementById('nav-showcase').textContent = t.navShowcase;
+      document.getElementById('nav-features').textContent = t.navFeatures;
+      document.getElementById('nav-curriculum').textContent = t.navCurriculum;
+      document.getElementById('nav-overview').textContent = t.navOverview;
+      document.getElementById('btn-nav-action').textContent = t.btnNavAction;
+
+      document.getElementById('hero-badge-text').textContent = t.heroBadgeText;
       document.getElementById('hero-title').innerHTML = t.heroTitle;
       document.getElementById('hero-desc').textContent = t.heroDesc;
-      document.getElementById('cta-btn-main').textContent = t.ctaBtnMain;
-      document.getElementById('cta-btn-terms').textContent = t.ctaBtnTerms;
+      document.getElementById('hero-btn-primary').textContent = t.heroBtnPrimary;
+      document.getElementById('hero-btn-secondary').textContent = t.heroBtnSecondary;
       document.getElementById('proof-units').textContent = t.proofUnits;
       document.getElementById('proof-audio').textContent = t.proofAudio;
+      document.getElementById('proof-offline').textContent = t.proofOffline;
       document.getElementById('branko-speech').textContent = t.brankoSpeech;
 
-      document.getElementById('section-features-title').textContent = t.sectionFeaturesTitle;
-      document.getElementById('section-features-sub').textContent = t.sectionFeaturesSub;
+      document.getElementById('tag-showcase').textContent = t.tagShowcase;
+      document.getElementById('title-showcase').textContent = t.titleShowcase;
+      document.getElementById('desc-showcase').textContent = t.descShowcase;
+      document.getElementById('mockup-quiz-sub').textContent = t.mockupQuizSub;
+      document.getElementById('mockup-quiz-trans').textContent = t.mockupQuizTrans;
+      document.getElementById('mockup-check-btn').textContent = t.mockupCheckBtn;
 
+      document.getElementById('showcase-f1-title').textContent = t.showcaseF1Title;
+      document.getElementById('showcase-f1-desc').textContent = t.showcaseF1Desc;
+      document.getElementById('showcase-f2-title').textContent = t.showcaseF2Title;
+      document.getElementById('showcase-f2-desc').textContent = t.showcaseF2Desc;
+      document.getElementById('showcase-f3-title').textContent = t.showcaseF3Title;
+      document.getElementById('showcase-f3-desc').textContent = t.showcaseF3Desc;
+
+      document.getElementById('tag-features').textContent = t.tagFeatures;
+      document.getElementById('title-features').textContent = t.titleFeatures;
+      document.getElementById('desc-features').textContent = t.descFeatures;
       document.getElementById('card1-title').textContent = t.card1Title;
       document.getElementById('card1-desc').textContent = t.card1Desc;
       document.getElementById('card2-title').textContent = t.card2Title;
@@ -772,44 +1465,53 @@
       document.getElementById('card4-title').textContent = t.card4Title;
       document.getElementById('card4-desc').textContent = t.card4Desc;
 
+      document.getElementById('tag-curriculum').textContent = t.tagCurriculum;
+      document.getElementById('title-curriculum').textContent = t.titleCurriculum;
+      document.getElementById('desc-curriculum').textContent = t.descCurriculum;
+      document.getElementById('lvl-a1-title').textContent = t.lvlA1Title;
+      document.getElementById('lvl-a1-desc').textContent = t.lvlA1Desc;
+      document.getElementById('lvl-a1-stats').textContent = t.lvlA1Stats;
+      document.getElementById('lvl-a2-title').textContent = t.lvlA2Title;
+      document.getElementById('lvl-a2-desc').textContent = t.lvlA2Desc;
+      document.getElementById('lvl-a2-stats').textContent = t.lvlA2Stats;
+      document.getElementById('lvl-b1-title').textContent = t.lvlB1Title;
+      document.getElementById('lvl-b1-desc').textContent = t.lvlB1Desc;
+      document.getElementById('lvl-b1-stats').textContent = t.lvlB1Stats;
+      document.getElementById('lvl-b2-title').textContent = t.lvlB2Title;
+      document.getElementById('lvl-b2-desc').textContent = t.lvlB2Desc;
+      document.getElementById('lvl-b2-stats').textContent = t.lvlB2Stats;
+
       document.getElementById('stat-units').textContent = t.statUnits;
       document.getElementById('stat-nodes').textContent = t.statNodes;
       document.getElementById('stat-sentences').textContent = t.statSentences;
       document.getElementById('stat-audio').textContent = t.statAudio;
 
-      document.getElementById('cta-box-title').textContent = t.ctaBoxTitle;
-      document.getElementById('cta-box-desc').textContent = t.ctaBoxDesc;
-      document.getElementById('cta-box-btn').textContent = t.ctaBoxBtn;
+      document.getElementById('cta-title').textContent = t.ctaTitle;
+      document.getElementById('cta-desc').textContent = t.ctaDesc;
+      document.getElementById('cta-btn-start').textContent = t.ctaBtnStart;
+      document.getElementById('cta-btn-git').textContent = t.ctaBtnGit;
 
       document.getElementById('footer-privacy').textContent = t.footerPrivacy;
       document.getElementById('footer-terms').textContent = t.footerTerms;
       document.getElementById('footer-copyright').textContent = t.footerCopyright;
-
-      try {
-        localStorage.setItem('serbio_lang', lang);
-      } catch {}
     }
 
-    // Auto-detect browser language or read localStorage
-    window.addEventListener('DOMContentLoaded', () => {
-      let saved = null;
-      try {
-        saved = localStorage.getItem('serbio_lang');
-      } catch {}
-
-      if (saved && (saved === 'hu' || saved === 'en' || saved === 'ru')) {
+    // Initialize Language
+    (function init() {
+      const saved = localStorage.getItem('serbio_site_lang');
+      if (saved && translations[saved]) {
         setLang(saved);
-      } else {
-        const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        if (navLang.startsWith('en')) {
-          setLang('en');
-        } else if (navLang.startsWith('ru')) {
-          setLang('ru');
-        } else {
-          setLang('hu');
-        }
+        return;
       }
-    });
+      const navLang = (navigator.language || 'hu').toLowerCase();
+      if (navLang.startsWith('ru')) {
+        setLang('ru');
+      } else if (navLang.startsWith('en')) {
+        setLang('en');
+      } else {
+        setLang('hu');
+      }
+    })();
   </script>
 </body>
 </html>
