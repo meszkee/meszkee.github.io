@@ -926,7 +926,7 @@
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="assets/img/screen1.png" alt="Tanösvény & Haladás" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img id="screen1-img" src="assets/img/screen1-hu.png" alt="Tanösvény & Haladás" class="screen-img" onerror="handleScreenError(this, 1)">
               <div class="screen-placeholder" style="display:flex;">
                 <span class="placeholder-badge" id="scr1-badge">1. Lépés</span>
                 <div class="placeholder-visual">
@@ -947,7 +947,7 @@
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="assets/img/screen2.png" alt="Interaktív Kvízek" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img id="screen2-img" src="assets/img/screen2-hu.png" alt="Interaktív Kvízek" class="screen-img" onerror="handleScreenError(this, 2)">
               <div class="screen-placeholder" style="display:flex;">
                 <span class="placeholder-badge" id="scr2-badge">2. Gyakorlás</span>
                 <div class="placeholder-visual">
@@ -968,7 +968,7 @@
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="assets/img/screen3.png" alt="Szótár & Kiejtés" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img id="screen3-img" src="assets/img/screen3-hu.png" alt="Szótár & Kiejtés" class="screen-img" onerror="handleScreenError(this, 3)">
               <div class="screen-placeholder" style="display:flex;">
                 <span class="placeholder-badge" id="scr3-badge">3. Szótár</span>
                 <div class="placeholder-visual">
@@ -989,7 +989,7 @@
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="assets/img/screen4.png" alt="Ranglista & Széria" class="screen-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img id="screen4-img" src="assets/img/screen4-hu.png" alt="Ranglista & Széria" class="screen-img" onerror="handleScreenError(this, 4)">
               <div class="screen-placeholder" style="display:flex;">
                 <span class="placeholder-badge" id="scr4-badge">4. Közösség</span>
                 <div class="placeholder-visual">
@@ -1471,6 +1471,34 @@
       document.getElementById('footer-privacy').textContent = t.footerPrivacy;
       document.getElementById('footer-terms').textContent = t.footerTerms;
       document.getElementById('footer-copyright').textContent = t.footerCopyright;
+
+      updateScreenImages(lang);
+    }
+
+    function handleScreenError(img, num) {
+      if (img.dataset.triedGeneric !== 'true') {
+        img.dataset.triedGeneric = 'true';
+        img.src = `assets/img/screen${num}.png`;
+      } else {
+        img.style.display = 'none';
+        if (img.nextElementSibling) {
+          img.nextElementSibling.style.display = 'flex';
+        }
+      }
+    }
+
+    function updateScreenImages(lang) {
+      for (let i = 1; i <= 4; i++) {
+        const img = document.getElementById(`screen${i}-img`);
+        if (img) {
+          img.dataset.triedGeneric = 'false';
+          img.src = `assets/img/screen${i}-${lang}.png`;
+          img.style.display = 'block';
+          if (img.nextElementSibling) {
+            img.nextElementSibling.style.display = 'none';
+          }
+        }
+      }
     }
 
     // Initialize Language
