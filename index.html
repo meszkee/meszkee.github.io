@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serbio — Tanulj Szerbül Mobilapp</title>
+  <meta name="google-site-verification" content="google5a0ad7470a84e2ff" />
+  <meta name="description" content="Serbio — Duolingo-stílusú, offline szerb nyelvtanuló mobilalkalmazás Brankóval, a szerb macival.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #58CC02;
+      --primary-dark: #46A302;
+      --secondary: #1CB0F6;
+      --accent: #FF9600;
+      --bg: #F7F9FA;
+      --card-bg: #FFFFFF;
+      --text: #3C3C3C;
+      --text-muted: #777777;
+      --border: #E5E5E5;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      margin-left: 20px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .mascot-badge {
+      font-size: 72px;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: bounce 2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .tagline {
+      font-size: 20px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      background: #FFFFFF;
+      border: 2px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .features {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 0 var(--border);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+    }
+    .card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1A1A1A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    footer {
+      margin-top: auto;
+      background: #FFFFFF;
+      border-top: 2px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">🐻 Serbio</a>
+    <div class="nav-links">
+      <a href="https://meszkee.github.io/serbio-privacy-policy/">Adatvédelem</a>
+      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms">ÁSZF</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="mascot-badge">🐻🇷🇸</div>
+    <h1>Serbio — Tanulj Szerbül!</h1>
+    <p class="tagline">Játékos, offline Duolingo-stílusú szerb nyelvtanuló mobilapp Brankóval, a kabalamacival.</p>
+
+    <div class="badges">
+      <span class="badge">✈️ 100% Offline működés</span>
+      <span class="badge">🔤 Cirill & Latin írásmód</span>
+      <span class="badge">🎙️ 9 700+ Szerb stúdióhang</span>
+      <span class="badge">📖 40 Egység & 989 Szó</span>
+    </div>
+
+    <div class="features">
+      <div class="card">
+        <h3>✈️ Repülőgép üzemmód</h3>
+        <p>Minden lecke, kvíz és hanganyag internetkapcsolat nélkül, 100%-ban elérhető a telefonodon.</p>
+      </div>
+      <div class="card">
+        <h3>🇷🇸 Élethű Szerb Beszéd</h3>
+        <p>Valódi, mindennapi balkáni és belgrádi kifejezések pékségben, kávézóban és a piacon.</p>
+      </div>
+      <div class="card">
+        <h3>💬 Két egyenrangú írásmód</h3>
+        <p>Gyakorolj egyszerre szerb cirill és latin betűkkel egyetlen kattintásos átváltással.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Serbio App. Minden jog fenntartva.</p>
+    <p style="margin-top: 8px;">
+      <a href="https://meszkee.github.io/serbio-privacy-policy/">Adatvédelmi Irányelvek (Privacy Policy)</a> • 
+      <a href="https://meszkee.github.io/serbio-privacy-policy/#terms">Felhasználási Feltételek (Terms of Service)</a>
+    </p>
+  </footer>
+</body>
+</html>
